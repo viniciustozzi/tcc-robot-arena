@@ -14,8 +14,9 @@ public class Andar
 	{
 		//Executar o monobehaviour de andar, callback deve ser passado para ele, e ele invoca
 		Debug.Log("andou!");
+
+        //Rodo AheadCommand() do monobehaviour
+
 		callback.Invoke();
 	}
-
-	
 }
