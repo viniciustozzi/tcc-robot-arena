@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -9,7 +8,7 @@ public class ExecuteCycle : MonoBehaviour, IBlock
 
     private int m_index;
 
-    private Action m_callback;
+    protected Action m_callback;
     
     protected void ExecuteBlock()
     {
@@ -20,13 +19,13 @@ public class ExecuteCycle : MonoBehaviour, IBlock
     {
         m_index++;
 
-        if (m_index >= LogicBlocks.Count)
+        ExecuteBlock();
+
+        if (m_index >= LogicBlocks.Count - 1)
         {
             if (m_callback != null)
                 m_callback.Invoke();
         }
-
-        ExecuteBlock();
     }
 
     public virtual void Initialize() { }
