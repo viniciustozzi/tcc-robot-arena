@@ -5,11 +5,14 @@ using System;
 public class ExecuteCycle : MonoBehaviour, IBlock
 {
     public List<IBlock> LogicBlocks { get; set; }
-
+    
     private int m_index;
 
-    protected Action m_callback;
-    
+    //Callback executado quando termina de executar uma vez a lista de blocos lógicos
+    public Action listRunCallback;
+
+    public Action _runAllBlock;
+
     protected void ExecuteBlock()
     {
         LogicBlocks[m_index].Run(OnEndRunning);
@@ -23,12 +26,19 @@ public class ExecuteCycle : MonoBehaviour, IBlock
 
         if (m_index >= LogicBlocks.Count - 1)
         {
-            if (m_callback != null)
-                m_callback.Invoke();
+            if (listRunCallback != null)
+                listRunCallback.Invoke();
         }
     }
-
-    public virtual void Initialize() { }
-
+    
+    /// <summary>
+    /// Executa o comando desse bloco
+    /// </summary>
+    /// <param name="callback">callback de quando o bloco termina de executar por completo</param>
     public virtual void Run(Action callback) { }
+
+    public virtual void Initialize()
+    {
+
+    }
 }

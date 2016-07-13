@@ -5,6 +5,6 @@ public class RobotAnalyser : ExecuteCycle
 {
 	void Start()
 	{
-		ExecuteBlock();
+        
 	}
 }
