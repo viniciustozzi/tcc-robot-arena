@@ -1,26 +1,23 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using System;
 
-public class If : ExecuteCycle
+public class If : MonoBehaviour, IBlock
 {
     public bool condicao;
 
     private Action m_callback;
 
-    public override void Initialize()
+    public List<IBlock> LogicBlocks { get; set; }
+
+    public void Initialize()
     {
-        listRunCallback = onRunAllList;
+        
     }
 
-    public override void Run(Action callback)
+    public void Run(Action callback)
     {
         m_callback = callback;
-
-        //Antes de rodar a ação do if, verificar se a condição dele é verdadeira (mas onde?)
-        if (condicao)
-        {
-            ExecuteBlock();
-        }
     }
 
     private void onRunAllList()
