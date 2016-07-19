@@ -6,5 +6,5 @@ public interface IBlock
 {
 	void Initialize();
 	
-	void Run(Action onFinishActionInBlock);
+	void Run(Action blockCallback);
 }
