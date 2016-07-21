@@ -20,10 +20,10 @@ public class RobotShot : MonoBehaviour
         Invoke("finishCooldownTime", cooldownTime);
     }
 
-	public void SetParameter(object value)
-	{
-
-	}
+    public void SetParameter(object x)
+    {
+        
+    }
 
     private void finishCooldownTime()
     {

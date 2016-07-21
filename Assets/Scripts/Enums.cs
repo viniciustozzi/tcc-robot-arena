@@ -14,3 +14,10 @@ public enum BooleanOperator
 	LessAndEqual = 3,
 	Less = 4
 }
+
+public enum VariableType
+{
+    Number = 0,
+    String = 1,
+    Bool = 2
+}
