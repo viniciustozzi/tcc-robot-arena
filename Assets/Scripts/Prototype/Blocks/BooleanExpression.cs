@@ -8,8 +8,6 @@ public class BooleanExpression
     private VariableInfo m_var2;
     private BooleanOperator m_operationType;
 
-
-
     public BooleanExpression(string var1Name, string var2Name, BooleanOperator opType)
 	{
 		m_var1 = VariableController.Variables[var1Name];
@@ -27,33 +25,36 @@ public class BooleanExpression
         int value1 = 0;
         int value2 = 0;
 
+        //Caso a conversão não seja possível, deve permitir que quem esteja chamando essa função tratar esse erro
         try
         {
-            //value1
+            value1 = Convert.ToInt32(m_var1.Value);
+            value2 = Convert.ToInt32(m_var2.Value);
         }
         catch (Exception e)
         {
+            if (onParseError != null)
+                onParseError.Invoke();
             
             throw;
+            return false;
         }
 
-        //switch (m_operationType)
-        //{
-        //    case BooleanOperator.Bigger:
-        //        return m_var1.Value > m_var2.Value;
-        //    case BooleanOperator.BiggerAndEqual:
-        //        return m_var1 >= m_var2;
-        //    case BooleanOperator.Equal:
-        //        return m_var1 == m_var2;
-        //    case BooleanOperator.LessAndEqual:
-        //        return m_var1 <= m_var2;
-        //    case BooleanOperator.Less:
-        //        return m_var1 < m_var2;
-        //}
+        switch (m_operationType)
+        {
+            case BooleanOperator.Bigger:
+                return value1 > value2;
+            case BooleanOperator.BiggerAndEqual:
+                return value1 >= value2;
+            case BooleanOperator.Equal:
+                return value1 == value2;
+            case BooleanOperator.LessAndEqual:
+                return value1 <= value2;
+            case BooleanOperator.Less:
+                return value1 < value2;
+        }
 
         Debug.LogWarning("Expressão booleana não pode ser validada corretamente!");
         return false;
     }
-
-    
 }

@@ -62,7 +62,7 @@ public class MoveAhead : MonoBehaviour, IBlock
     /// </summary>
     private void resetVelocity()
     {
-        m_rigidbody.velocity = Vector3.zero;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         m_time = 0;
         m_move = false;
     }

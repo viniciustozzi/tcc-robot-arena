@@ -11,12 +11,12 @@ public class ExecuteCycle : MonoBehaviour, IBlock
 
     void Start()
     {
-        LogicBlocks = new List<IBlock>();
+        
     }
 
     public void Initialize()
     {
-        
+        LogicBlocks = new List<IBlock>();
     }
 
     public void Run(Action blockCallback)
