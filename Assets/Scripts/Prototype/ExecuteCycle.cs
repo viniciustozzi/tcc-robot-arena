@@ -9,14 +9,14 @@ public class ExecuteCycle : MonoBehaviour, IBlock
     private Action m_callback;
     private int m_index;
 
-    void Start()
+    void Awake()
     {
-        
+        LogicBlocks = new List<IBlock>();
     }
 
     public void Initialize()
     {
-        LogicBlocks = new List<IBlock>();
+        LogicBlocks.ForEach(x => x.Initialize());
     }
 
     public void Run(Action blockCallback)
@@ -28,15 +28,16 @@ public class ExecuteCycle : MonoBehaviour, IBlock
 
     private void executeBlock()
     {
-        LogicBlocks[m_index].Run(()=>
-            {
-                m_index++;
-
-                if (m_index >= LogicBlocks.Count)
-                    m_index = 0;
-
-                executeBlock();
-            });
+        LogicBlocks[m_index].Run();
     }
-    
+
+    private void _onExecuteBlock()
+    {
+        m_index++;
+
+        if (m_index >= LogicBlocks.Count)
+            m_index = 0;
+
+        executeBlock();
+    }
 }

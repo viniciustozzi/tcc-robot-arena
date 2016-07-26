@@ -6,12 +6,7 @@ public static class VariableController
     /// <summary>
     /// All variables existing that are defined by the user
     /// </summary>
-    public static Dictionary<string, VariableInfo> Variables;
-
-//    public static VariableController()
-//    {
-//        Variables = new Dictionary<string, VariableInfo>();
-//    }
+    public static Dictionary<string, VariableInfo> Variables = new Dictionary<string, VariableInfo>();
 
     public static void DeclareVariable(string name, VariableType type, object value)
     {

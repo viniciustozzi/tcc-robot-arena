@@ -34,6 +34,8 @@ public class MoveAhead : MonoBehaviour, IBlock
 
             else
             {
+                Debug.Log("Androu tudo que tinha que andar");
+
                 //Reseta a velocidade do robo para 0
                 resetVelocity();
 
