@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class MoveBack : MonoBehaviour {
+public class MoveBack : MonoBehaviour, IBlock {
 
     private Action m_onFinishMove;
     private Rigidbody m_rigidbody;

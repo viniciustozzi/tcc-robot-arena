@@ -9,12 +9,12 @@ public class BooleanExpression
     private BooleanOperator m_operationType;
 
     public BooleanExpression(string var1Name, string var2Name, BooleanOperator opType)
-	{
-		m_var1 = VariableController.Variables[var1Name];
+    {
+        m_var1 = VariableController.Variables[var1Name];
         m_var2 = VariableController.Variables[var2Name];
 
         m_operationType = opType;
-	}
+    }
 
     /// <summary>
     /// Retorna verdadeiro se var1 operation var2
@@ -22,23 +22,28 @@ public class BooleanExpression
     /// <param name="onParseError">O parâmetro é convertido para inteiro, se houver erro nessa conversão, é invocado um callback de erro</param>
     public bool IsTrue(Action onParseError = null)
     {
+        return true;
+
         int value1 = 0;
         int value2 = 0;
 
         //Caso a conversão não seja possível, deve permitir que quem esteja chamando essa função tratar esse erro
-        try
-        {
-            value1 = Convert.ToInt32(m_var1.Value);
-            value2 = Convert.ToInt32(m_var2.Value);
-        }
-        catch (Exception e)
-        {
-            if (onParseError != null)
-                onParseError.Invoke();
-            
-            throw;
-            return false;
-        }
+        //try
+        //{
+        //    value1 = Convert.ToInt32(m_var1.Value);
+        //    value2 = Convert.ToInt32(m_var2.Value);
+        //}
+        //catch (Exception e)
+        //{
+        //    if (onParseError != null)
+        //        onParseError.Invoke();
+
+        //    return false;
+        //    throw;
+        //}
+
+        value1 = (int)m_var1.Value;
+        value2 = (int)m_var2.Value;
 
         switch (m_operationType)
         {

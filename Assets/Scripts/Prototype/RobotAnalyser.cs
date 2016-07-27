@@ -25,16 +25,16 @@ public class RobotAnalyser : MonoBehaviour
         var moveAhead = m_robot.AddComponent<MoveAhead>();
         moveAhead.Distance = 20;
 
-        VariableController.DeclareVariable("x", VariableType.Number, 3);
-        VariableController.DeclareVariable("y", VariableType.Number, 1);
+        VariableController.DeclareVariable("x", VariableType.Number, 1);
+        VariableController.DeclareVariable("y", VariableType.Number, 3);
 
         var ifComponent = m_robot.AddComponent<If>();
         ifComponent.LogicBlocks = new List<IBlock>();
         ifComponent.Initialize();
         ifComponent.condicao = new BooleanExpression("x", "y", BooleanOperator.Less);
 
-        var moveBack = m_robot.AddComponent<MoveAhead>();
-        moveBack.Distance = 30;
+        var moveBack = m_robot.AddComponent<MoveBack>();
+        moveBack.Distance = 10;
 
         ifComponent.LogicBlocks.Add(moveBack);
         executeComponent.LogicBlocks.Add(moveAhead);

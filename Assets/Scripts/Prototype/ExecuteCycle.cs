@@ -23,12 +23,18 @@ public class ExecuteCycle : MonoBehaviour, IBlock
     {
         m_callback = blockCallback;
 
+        if (LogicBlocks.Count <= 0)
+        {
+            m_callback.Invoke();
+            return;
+        }
+
         executeBlock();
     }
 
     private void executeBlock()
     {
-        LogicBlocks[m_index].Run();
+        LogicBlocks[m_index].Run(_onExecuteBlock);
     }
 
     private void _onExecuteBlock()

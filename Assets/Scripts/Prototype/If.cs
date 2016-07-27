@@ -27,18 +27,25 @@ public class If : MonoBehaviour, IBlock
     public void Run(Action callback)
     {
         m_callback = callback;
+        m_index = 0;
+        
+        if (LogicBlocks.Count <= 0)
+        {
+            m_callback.Invoke();
+            return;
+        }
 
         if (condicao.IsTrue())
             executeBlock();
         else
+        {
             m_callback.Invoke();
+        }
+            
     }
 
 	private void executeBlock()
 	{
-        Debug.Log(m_index);
-
-
 		LogicBlocks[m_index].Run(_onFinishExecute);
 	}
 

@@ -20,6 +20,12 @@ public class While : MonoBehaviour, IBlock
     {
         m_callback = blockCallback;
 
+        if (LogicBlocks.Count <= 0)
+        {
+            m_callback.Invoke();
+            return;
+        }
+
         if (expression.IsTrue())
             executeBlock();
     }
@@ -39,7 +45,11 @@ public class While : MonoBehaviour, IBlock
                         executeBlock();
                     }
                     else
+                    {
+                        m_index = 0;
                         m_callback.Invoke();
+                    }
+                        
                 }
                 else
                     executeBlock();
