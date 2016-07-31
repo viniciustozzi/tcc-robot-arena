@@ -39,12 +39,17 @@ public class If : MonoBehaviour, IBlock
             executeBlock();
         else
         {
-            m_callback.Invoke();
-        }
-            
+            Invoke("InvokeCallback", 0.5f);
+        }       
+    }
+    
+    private void InvokeCallback()
+    {
+        m_callback.Invoke();
     }
 
-	private void executeBlock()
+
+    private void executeBlock()
 	{
 		LogicBlocks[m_index].Run(_onFinishExecute);
 	}

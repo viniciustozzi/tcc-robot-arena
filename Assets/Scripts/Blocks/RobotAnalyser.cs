@@ -33,17 +33,22 @@ public class RobotAnalyser : MonoBehaviour
         ifComponent.Initialize();
         ifComponent.condicao = new BooleanExpression("x", "y", BooleanOperator.Less);
 
-        var moveBack = m_robot.AddComponent<MoveBack>();
+        var moveBack = m_robot.AddComponent<MoveAhead>();
         moveBack.Distance = 10;
 
         ifComponent.LogicBlocks.Add(moveBack);
-        executeComponent.LogicBlocks.Add(moveAhead);
+        //executeComponent.LogicBlocks.Add(moveAhead);
         executeComponent.LogicBlocks.Add(ifComponent);
 
         executeComponent.Initialize();
 
-        executeComponent.Run(() => Debug.Log("andou jesus"));
+        executeComponent.Run(metodoDeJesus);
 	}
+
+    private void metodoDeJesus()
+    { 
+        Debug.Log("andou jesus");
+    }
 
     private void addchild()
     {

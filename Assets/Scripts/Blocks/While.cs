@@ -47,12 +47,17 @@ public class While : MonoBehaviour, IBlock
                     else
                     {
                         m_index = 0;
-                        m_callback.Invoke();
+                        Invoke("InvokeCallback", 0.5f);
                     }
-                        
+
                 }
                 else
                     executeBlock();
             });
+    }
+
+    private void InvokeCallback()
+    {
+        m_callback.Invoke();
     }
 }
