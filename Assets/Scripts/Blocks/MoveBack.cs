@@ -14,12 +14,7 @@ public class MoveBack : MonoBehaviour, IBlock {
     /// The distance that the robot will move
     /// </summary>
     public float Distance { get; set; }
-
-    void Start()
-    {
-        m_rigidbody = GetComponent<Rigidbody>();
-    }
-
+    
     void FixedUpdate()
     {
         if (m_move)
@@ -46,7 +41,7 @@ public class MoveBack : MonoBehaviour, IBlock {
 
     public void Initialize()
     {
-
+        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     public void Run(Action callback)

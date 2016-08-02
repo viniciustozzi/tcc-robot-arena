@@ -9,17 +9,12 @@ public class Shoot : MonoBehaviour, IBlock
     private GameObject m_shotPrefab;
     private Action m_callback;
 
-    void Start()
+    public void Initialize()
     {
         LoadShotPrefab();
 
         m_speed = 30f;
         m_cooldownTime = 1.5f;
-    }
-
-    public void Initialize()
-    {
-        
     }
 
     public void Run(Action blockCallback)

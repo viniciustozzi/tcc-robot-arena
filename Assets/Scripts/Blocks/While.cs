@@ -14,6 +14,8 @@ public class While : MonoBehaviour, IBlock
     public void Initialize()
     {
         m_index = 0;
+
+        LogicBlocks.ForEach(x => x.Initialize());
     }
 
     public void Run(Action blockCallback)

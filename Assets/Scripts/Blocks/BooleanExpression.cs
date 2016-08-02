@@ -22,8 +22,6 @@ public class BooleanExpression
     /// <param name="onParseError">O parâmetro é convertido para inteiro, se houver erro nessa conversão, é invocado um callback de erro</param>
     public bool IsTrue(Action onParseError = null)
     {
-        return false;
-
         int value1 = 0;
         int value2 = 0;
 

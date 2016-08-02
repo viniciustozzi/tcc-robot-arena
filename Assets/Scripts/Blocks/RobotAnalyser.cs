@@ -8,8 +8,8 @@ public class RobotAnalyser : MonoBehaviour
     private GameObject m_robot;
     public GameObject prefab;
 
-	void Start()
-	{
+    void Start()
+    {
         m_robot = new GameObject();
 
         addchild();
@@ -30,23 +30,29 @@ public class RobotAnalyser : MonoBehaviour
 
         var ifComponent = m_robot.AddComponent<If>();
         ifComponent.LogicBlocks = new List<IBlock>();
-        ifComponent.Initialize();
         ifComponent.condicao = new BooleanExpression("x", "y", BooleanOperator.Less);
 
-        var moveBack = m_robot.AddComponent<MoveAhead>();
-        moveBack.Distance = 10;
+        //var moveBack = m_robot.AddComponent<MoveBack>();
+        //moveBack.Distance = 10;
 
-        ifComponent.LogicBlocks.Add(moveBack);
+        var whileComp = m_robot.AddComponent<While>();
+        whileComp.LogicBlocks = new List<IBlock>();
+        whileComp.expression = new BooleanExpression("x", "y", BooleanOperator.Less);
+        var shotComp = m_robot.AddComponent<Shoot>();
+        whileComp.LogicBlocks.Add(shotComp);
+
+        //ifComponent.LogicBlocks.Add(moveBack);
         //executeComponent.LogicBlocks.Add(moveAhead);
         executeComponent.LogicBlocks.Add(ifComponent);
+        executeComponent.LogicBlocks.Add(whileComp);
 
         executeComponent.Initialize();
 
         executeComponent.Run(metodoDeJesus);
-	}
+    }
 
     private void metodoDeJesus()
-    { 
+    {
         Debug.Log("andou jesus");
     }
 
