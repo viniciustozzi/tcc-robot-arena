@@ -39,7 +39,7 @@ public class If : MonoBehaviour, IBlock
             executeBlock();
         else
         {
-            Invoke("InvokeCallback", 0.5f);
+            m_callback.Invoke();
         }       
     }
     
