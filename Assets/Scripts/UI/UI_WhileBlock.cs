@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using System;
 
-public class UI_IfBlock : UIBlock
-{
+public class UI_WhileBlock : UIBlock {
+
     public List<UI_BooleanExpression> BooleanExpressions;
 
     public List<UIBlock> Blocks;

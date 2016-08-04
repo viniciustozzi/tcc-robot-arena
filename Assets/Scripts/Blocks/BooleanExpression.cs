@@ -60,4 +60,9 @@ public class BooleanExpression
         Debug.LogWarning("Expressão booleana não pode ser validada corretamente!");
         return false;
     }
+
+    public override string ToString()
+    {
+        return m_var1.Value.ToString() + " " + m_operationType.ToString() + " " + m_var2.Value.ToString() + " = " + IsTrue().ToString();
+    }
 }

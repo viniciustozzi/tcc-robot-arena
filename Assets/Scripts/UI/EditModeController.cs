@@ -13,9 +13,4 @@ public class EditModeController : MonoBehaviour {
 
         //Invoke("teste", 1f);
     }
-
-    void teste()
-    {
-        var expression = ((UI_IfBlock)UIBlocks[0]).GetBooleanExpression();
-    }
 }
