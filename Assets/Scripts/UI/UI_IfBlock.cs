@@ -13,8 +13,12 @@ public class UI_IfBlock : UIBlock
 
     void Start()
     {
-        fillOperatorsInfo();
+        drop_varA.ClearOptions();
+        drop_varB.ClearOptions();
+        drop_operationType.ClearOptions();
+
         fillVariableInfo();
+        fillOperatorsInfo();
     }
 
     public BooleanExpression GetBooleanExpression()
