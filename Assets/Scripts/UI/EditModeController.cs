@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class EditModeController : MonoBehaviour {
-
+public class EditModeController : MonoBehaviour
+{
     public List<UIBlock> UIBlocks;
 
-	void Awake()
+    void Awake()
     {
         //Criação de variaveis para testes:
         VariableController.DeclareVariable("x", VariableType.Number, 3);
@@ -13,4 +13,6 @@ public class EditModeController : MonoBehaviour {
 
         //Invoke("teste", 1f);
     }
+
+    
 }
