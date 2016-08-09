@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class UsedBlocks : MonoBehaviour
+public class UsedBlocks : MonoBehaviour, IDropHandler
 {
-	public void SetBlockHere(UIBlock block)
+    public void OnDrop(PointerEventData eventData)
     {
-        block.transform.parent = transform;
+        if (eventData.pointerDrag == null) return;
+
+        GameObject goDragged = eventData.pointerDrag;
+
+        goDragged.transform.SetParent(transform);
     }
 }

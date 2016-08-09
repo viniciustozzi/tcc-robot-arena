@@ -5,28 +5,30 @@ using System;
 
 public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private ToUseBlocks pnl_toUseBlocks;
-    private UsedBlocks pnl_usedBlocks;
-    private bool m_beingUsed;
     private Vector3 m_startPos;
-
-    public static GameObject ItemBeingDragged;
+    private CanvasGroup m_canvasGroup;
+    private EditModeController m_editController;
 
     void Awake()
     {
-        pnl_toUseBlocks = FindObjectOfType<ToUseBlocks>();
-        pnl_usedBlocks = FindObjectOfType<UsedBlocks>();
-    }
+        m_canvasGroup = GetComponent<CanvasGroup>();
 
-    public void AddBlock()
-    {
-
+        m_editController = FindObjectOfType<EditModeController>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        m_startPos = transform.position;
-        ItemBeingDragged = gameObject;
+        //Lógica se o bloco está no panel de blocos para se usar
+        if (transform.parent == m_editController.ToUseTransform)
+        {
+            m_startPos = transform.position;
+
+            m_canvasGroup.blocksRaycasts = false;
+        }//Lógica se o bloco está no panel de blocos usados
+        else
+        {
+            
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -36,7 +38,25 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ItemBeingDragged = null;
-        transform.position = m_startPos;
+        m_canvasGroup.blocksRaycasts = true;
+
+        if (transform.parent == m_editController.ToUseTransform)
+        {
+
+        }
+        else
+        {
+            if (transform.parent != m_editController.UsedBlocksTransform)
+            {
+                transform.position = m_startPos;
+                return;
+            }
+
+            //Create a copy of this object on the toUseBlocks list
+            GameObject go = (GameObject)Instantiate(gameObject, m_startPos, Quaternion.identity);
+            go.transform.SetParent(m_editController.ToUseTransform);
+        }
+
+        
     }
 }

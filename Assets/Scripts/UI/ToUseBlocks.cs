@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using System;
 
-public class ToUseBlocks : MonoBehaviour
+public class ToUseBlocks : MonoBehaviour, IDropHandler
 {
-    public void SetBlockHere(UIBlock block)
+    public void OnDrop(PointerEventData eventData)
     {
-        block.transform.parent = transform;
+        
     }
 }
