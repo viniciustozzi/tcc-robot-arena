@@ -7,5 +7,21 @@ public class UI_IfBlock : UIBlock
 {
     public List<UI_BooleanExpression> BooleanExpressions;
 
-    public List<UIBlock> Blocks;
+    private List<UIBlock> m_blocks;
+
+    public override bool CanHaveBlocks
+    {
+        get
+        {
+            return true;
+        }
+    }
+
+    public override List<UIBlock> UI_Blocks
+    {
+        get
+        {
+            return m_blocks;
+        }
+    }
 }
