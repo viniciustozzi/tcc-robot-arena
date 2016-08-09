@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
 
+public enum BlockPanel
+{
+    None = 0,
+    AvaibleBLocks = 1,
+    Used = 2
+}
+
 public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 m_startPos;
     private CanvasGroup m_canvasGroup;
     private EditModeController m_editController;
 
+    private BlockPanel m_currentState;
+
     void Awake()
     {
         m_canvasGroup = GetComponent<CanvasGroup>();
 
         m_editController = FindObjectOfType<EditModeController>();
+
+        m_currentState = BlockPanel.AvaibleBLocks;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Lógica se o bloco está no panel de blocos para se usar
-        if (transform.parent == m_editController.ToUseTransform)
+        switch (m_currentState)
         {
-            m_startPos = transform.position;
-
-            m_canvasGroup.blocksRaycasts = false;
-        }//Lógica se o bloco está no panel de blocos usados
-        else
-        {
-            
+            //Lógica se o bloco está no panel de blocos para se usar
+            case BlockPanel.AvaibleBLocks:
+                m_startPos = transform.position;
+                m_canvasGroup.blocksRaycasts = false;
+                break;
+            //Lógica se o bloco está no panel de blocos usados
+            case BlockPanel.Used:
+                break;
         }
     }
 
@@ -40,23 +51,28 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         m_canvasGroup.blocksRaycasts = true;
 
-        if (transform.parent == m_editController.ToUseTransform)
+        switch (m_currentState)
         {
+            case BlockPanel.AvaibleBLocks:
+                if (transform.parent != m_editController.UsedBlocksTransform)
+                {
+                    transform.position = m_startPos;
+                    return;
+                }
 
+                //Create a copy of this object on the toUseBlocks list
+                GameObject go = (GameObject)Instantiate(gameObject, m_startPos, Quaternion.identity);
+                go.transform.SetParent(m_editController.ToUseTransform);
+
+                m_currentState = BlockPanel.Used;
+                
+                break;
+            case BlockPanel.Used:
+                if (transform.parent != m_editController.UsedBlocksTransform)
+                {
+                    Destroy(gameObject);
+                }
+                break;
         }
-        else
-        {
-            if (transform.parent != m_editController.UsedBlocksTransform)
-            {
-                transform.position = m_startPos;
-                return;
-            }
-
-            //Create a copy of this object on the toUseBlocks list
-            GameObject go = (GameObject)Instantiate(gameObject, m_startPos, Quaternion.identity);
-            go.transform.SetParent(m_editController.ToUseTransform);
-        }
-
-        
     }
 }
