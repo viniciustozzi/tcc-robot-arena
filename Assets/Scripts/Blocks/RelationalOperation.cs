@@ -2,13 +2,13 @@
 using System.Collections;
 using System;
 
-public class BooleanExpression
+public class RelationalOperation
 {
     private VariableInfo m_var1;
     private VariableInfo m_var2;
-    private BooleanOperator m_operationType;
+    private RelationalOperator m_operationType;
 
-    public BooleanExpression(string var1Name, string var2Name, BooleanOperator opType)
+    public RelationalOperation(string var1Name, string var2Name, RelationalOperator opType)
     {
         m_var1 = VariableController.Variables[var1Name];
         m_var2 = VariableController.Variables[var2Name];
@@ -45,15 +45,15 @@ public class BooleanExpression
 
         switch (m_operationType)
         {
-            case BooleanOperator.Bigger:
+            case RelationalOperator.Bigger:
                 return value1 > value2;
-            case BooleanOperator.BiggerAndEqual:
+            case RelationalOperator.BiggerAndEqual:
                 return value1 >= value2;
-            case BooleanOperator.Equal:
+            case RelationalOperator.Equal:
                 return value1 == value2;
-            case BooleanOperator.LessAndEqual:
+            case RelationalOperator.LessAndEqual:
                 return value1 <= value2;
-            case BooleanOperator.Less:
+            case RelationalOperator.Less:
                 return value1 < value2;
         }
 

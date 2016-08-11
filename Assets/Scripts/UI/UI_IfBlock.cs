@@ -5,9 +5,16 @@ using System;
 
 public class UI_IfBlock : UIBlock
 {
-    public List<UI_BooleanExpression> BooleanExpressions;
+    public List<UI_RelationalOperation> BooleanExpressions;
 
     private List<UIBlock> m_blocks;
+
+    protected override void Awake()
+    {
+        m_blocks = new List<UIBlock>();
+
+        base.Awake();
+    }
 
     public override bool CanHaveBlocks
     {

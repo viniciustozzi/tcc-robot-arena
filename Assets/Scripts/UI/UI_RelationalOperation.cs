@@ -4,13 +4,13 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-public class UI_BooleanExpression : MonoBehaviour
+public class UI_RelationalOperation : MonoBehaviour
 {
     public Dropdown drop_varA;
     public Dropdown drop_varB;
     public Dropdown drop_operationType;
 
-    private BooleanExpression m_currentExpression;
+    private RelationalOperation m_currentExpression;
 
     void Start()
     {
@@ -22,20 +22,20 @@ public class UI_BooleanExpression : MonoBehaviour
         fillOperatorsInfo();
     }
 
-    public BooleanExpression GetBooleanExpression()
+    public RelationalOperation GetBooleanExpression()
     {
-        BooleanOperator opType = (BooleanOperator)Enum.Parse(typeof(BooleanOperator), drop_operationType.captionText.text);
+        RelationalOperator opType = (RelationalOperator)Enum.Parse(typeof(RelationalOperator), drop_operationType.captionText.text);
 
-        return new BooleanExpression(drop_varA.captionText.text, drop_varB.captionText.text, opType);
+        return new RelationalOperation(drop_varA.captionText.text, drop_varB.captionText.text, opType);
     }
 
     private void fillOperatorsInfo()
     {
         List<Dropdown.OptionData> operatorsOptions = new List<Dropdown.OptionData>();
 
-        for (int i = 0; i < Enum.GetNames(typeof(BooleanOperator)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(RelationalOperator)).Length; i++)
         {
-            Dropdown.OptionData option = new Dropdown.OptionData(Enum.GetName(typeof(BooleanOperator), i));
+            Dropdown.OptionData option = new Dropdown.OptionData(Enum.GetName(typeof(RelationalOperator), i));
             operatorsOptions.Add(option);
         }
 

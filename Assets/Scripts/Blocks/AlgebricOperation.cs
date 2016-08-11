@@ -2,13 +2,13 @@
 using System.Collections;
 using System;
 
-public class AlgebricExpression
+public class AlgebricOperation
 {
     private VariableInfo m_var1;
     private VariableInfo m_var2;
     private AlgebricOperator m_operationType;
 
-    public AlgebricExpression(string var1Name, string var2Name, AlgebricOperator opType)
+    public AlgebricOperation(string var1Name, string var2Name, AlgebricOperator opType)
     {
         m_var1 = VariableController.Variables[var1Name];
         m_var2 = VariableController.Variables[var2Name];

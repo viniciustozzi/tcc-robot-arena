@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI;
 
 public enum BlockPanel
 {
@@ -22,7 +23,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public virtual List<UIBlock> UI_Blocks { get { return null; } }
 
-    void Awake()
+    protected virtual void Awake()
     {
         m_canvasGroup = GetComponent<CanvasGroup>();
 
@@ -54,6 +55,27 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public void OnEndDrag(PointerEventData eventData)
     {
         m_canvasGroup.blocksRaycasts = true;
+
+        //Se o drag acabou ao colocar um bloco dentro de outro bloco, deve executar sua própria lógica
+        if (m_editController.DroppedOnBLock)
+        {
+            switch (m_currentState)
+            {
+                case BlockPanel.AvaibleBLocks:
+                    GameObject go = (GameObject)Instantiate(gameObject, m_startPos, Quaternion.identity);
+                    go.transform.SetParent(m_editController.ToUseTransform);
+
+                    m_currentState = BlockPanel.Used;
+                    break;
+                case BlockPanel.Used:
+
+                    break;
+            }
+
+            m_editController.DroppedOnBLock = false;
+
+            return;
+        }
 
         switch (m_currentState)
         {
@@ -92,8 +114,12 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         if (!block.CanHaveBlocks) return;
 
-        //Tratar isso visualmente, acoplamento do bloco
+        m_editController.DroppedOnBLock = true;
+
         UI_Blocks.Add(block);
+
+        block.transform.SetParent(transform);
+        block.transform.Reset();
     }
 }
 

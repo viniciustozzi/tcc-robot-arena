@@ -6,7 +6,7 @@ using System;
 public class While : MonoBehaviour, IBlock
 {
     public List<IBlock> LogicBlocks;
-    public BooleanExpression expression;
+    public RelationalOperation expression;
     private Action m_callback;
 
     private int m_index;

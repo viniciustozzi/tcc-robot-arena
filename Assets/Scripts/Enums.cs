@@ -6,13 +6,19 @@
 	Division = 3
 }
 
-public enum BooleanOperator
+public enum RelationalOperator
 {
 	Bigger = 0,
 	BiggerAndEqual = 1,
 	Equal = 2,
 	LessAndEqual = 3,
 	Less = 4
+}
+
+public enum LogicalOperator
+{
+    And = 0,
+    Or = 1
 }
 
 public enum VariableType

@@ -4,7 +4,7 @@ using System;
 
 public class If : MonoBehaviour, IBlock
 {
-    public BooleanExpression condicao;
+    public RelationalOperation condicao;
 
     private Action m_callback;
 
