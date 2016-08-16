@@ -4,13 +4,6 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI;
 
-public enum BlockPanel
-{
-    None = 0,
-    AvaibleBLocks = 1,
-    Used = 2
-}
-
 public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, I_UIBlock
 {
     private Vector3 m_startPos;

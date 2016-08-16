@@ -27,3 +27,19 @@ public enum VariableType
     String = 1,
     Bool = 2
 }
+
+public enum BlockPanel
+{
+    None = 0,
+    AvaibleBLocks = 1,
+    Used = 2
+}
+
+public enum CurrentBlocksAvaible
+{
+    RobotActions,
+    Variables,
+    Events,
+    Operators,
+    Controls
+}
