@@ -23,28 +23,57 @@ public class TabsController : MonoBehaviour
         }
             
         m_currentBlocks = (CurrentBlocksAvaible)group;
+
+        UpdateBlockGroup();
     }
 
     public void UpdateBlockGroup()
     {
+        clearScrollContent();
+
         switch (m_currentBlocks)
         {
             case CurrentBlocksAvaible.RobotActions:
 
-                foreach (var item in RobotActionsBlocks)
-                {
-
-                }
+                addToScroll(RobotActionsBlocks);
 
                 break;
             case CurrentBlocksAvaible.Variables:
+
+                addToScroll(VariablesBlocks);
+
                 break;
             case CurrentBlocksAvaible.Events:
+
+                addToScroll(EventsBlocks);
+
                 break;
             case CurrentBlocksAvaible.Operators:
+
+                addToScroll(OperatorsBlocks);
+
                 break;
             case CurrentBlocksAvaible.Controls:
+                addToScroll(ControlsBlocks);
                 break;
+        }
+    }
+    
+    private void addToScroll(List<GameObject> blockListType)
+    {
+        foreach (var item in blockListType)
+        {
+            var blockObj = Instantiate(item) as GameObject;
+            blockObj.transform.SetParent(scrollContent);
+        }
+    }
+
+    private void clearScrollContent()
+    {
+        //Destroy all blocks current in the scroll list
+        foreach (Transform item in scrollContent)
+        {
+            Destroy(item.gameObject);
         }
     }
 }
