@@ -10,8 +10,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private CanvasGroup m_canvasGroup;
     private EditModeController m_editController;
 
-    private BlockPanel m_currentState;
-
+    public BlockPanel m_currentState;
+    
     public virtual bool CanHaveBlocks { get { return false; } }
 
     public virtual List<UIBlock> UI_Blocks { get { return null; } }
@@ -107,12 +107,19 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         if (!block.CanHaveBlocks) return;
 
+        //block.m_currentState
+
         m_editController.DroppedOnBLock = true;
 
         UI_Blocks.Add(block);
 
         block.transform.SetParent(transform);
         block.transform.Reset();
+    }
+
+    public void SetParent(Transform parent)
+    {
+        transform.SetParent(parent);
     }
 }
 

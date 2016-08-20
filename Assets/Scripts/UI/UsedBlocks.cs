@@ -6,10 +6,12 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag == null) return;
+        UIBlock blockComp = eventData.pointerDrag.GetComponent<UIBlock>();
 
-        GameObject goDragged = eventData.pointerDrag;
+        if (blockComp == null) return;
 
-        goDragged.transform.SetParent(transform);
+        Debug.Log("Dropou: " + eventData.pointerDrag.name);
+
+        blockComp.SetParent(transform);
     }
 }

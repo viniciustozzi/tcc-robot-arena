@@ -65,6 +65,7 @@ public class TabsController : MonoBehaviour
         {
             var blockObj = Instantiate(item) as GameObject;
             blockObj.transform.SetParent(scrollContent);
+            blockObj.transform.ResetScale();
         }
     }
 
