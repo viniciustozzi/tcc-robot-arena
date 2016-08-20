@@ -14,4 +14,9 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
 
         blockComp.SetParent(transform);
     }
+
+    public void OnExcludeButton()
+    {
+
+    }
 }

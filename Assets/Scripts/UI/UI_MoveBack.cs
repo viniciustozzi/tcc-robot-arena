@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UI_MoveBack : MonoBehaviour
+public class UI_MoveBack : UIBlock
 {
     public InputField input_distance;
 

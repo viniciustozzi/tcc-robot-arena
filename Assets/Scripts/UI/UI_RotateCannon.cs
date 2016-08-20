@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UI_RotateCannon : MonoBehaviour
+public class UI_RotateCannon : UIBlock
 {
     public InputField input_angle;
 

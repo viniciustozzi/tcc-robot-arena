@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UI_RotateRobot : MonoBehaviour
+public class UI_RotateRobot : UIBlock
 {
     public InputField input_angle;
 

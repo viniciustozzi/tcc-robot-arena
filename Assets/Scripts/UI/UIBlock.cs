@@ -55,8 +55,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             switch (m_currentState)
             {
                 case BlockPanel.AvaibleBLocks:
-                    GameObject go = (GameObject)Instantiate(gameObject, m_startPos, Quaternion.identity);
-                    go.transform.SetParent(m_editController.ToUseTransform);
+                    m_editController.UpdateBlocksToUse();
 
                     m_currentState = BlockPanel.Used;
                     break;
@@ -79,10 +78,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                     return;
                 }
 
-                //Create a copy of this object on the toUseBlocks list
-                GameObject go = (GameObject)Instantiate(gameObject, m_startPos, Quaternion.identity);
-                go.transform.SetParent(m_editController.ToUseTransform);
-
+                m_editController.UpdateBlocksToUse();
                 m_currentState = BlockPanel.Used;
 
                 break;
@@ -106,9 +102,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         if (block == null) return;
 
         if (!block.CanHaveBlocks) return;
-
-        //block.m_currentState
-
+        
         m_editController.DroppedOnBLock = true;
 
         UI_Blocks.Add(block);
