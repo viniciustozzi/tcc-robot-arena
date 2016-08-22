@@ -13,8 +13,6 @@ public class EditModeController : MonoBehaviour
     public Transform ToUseTransform { get { return m_toUseBlocks.transform; } }
     public Transform UsedBlocksTransform { get { return m_usedBlocks.transform; } }
 
-    public bool DroppedOnBLock { get; set; }
-
     void Awake()
     {
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();

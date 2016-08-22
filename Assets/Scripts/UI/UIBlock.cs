@@ -9,9 +9,10 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private Vector3 m_startPos;
     private CanvasGroup m_canvasGroup;
     private EditModeController m_editController;
+    private static bool m_droppedOnBlock;
 
-    public BlockPanel m_currentState;
-    
+    public BlockPanel CurrentState { get; set; }
+
     public virtual bool CanHaveBlocks { get { return false; } }
 
     public virtual List<UIBlock> UI_Blocks { get { return null; } }
@@ -22,12 +23,12 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         m_editController = FindObjectOfType<EditModeController>();
 
-        m_currentState = BlockPanel.AvaibleBLocks;
+        CurrentState = BlockPanel.AvaibleBLocks;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        switch (m_currentState)
+        switch (CurrentState)
         {
             //Lógica se o bloco está no panel de blocos para se usar
             case BlockPanel.AvaibleBLocks:
@@ -50,26 +51,27 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         m_canvasGroup.blocksRaycasts = true;
 
         //Se o drag acabou ao colocar um bloco dentro de outro bloco, deve executar sua própria lógica
-        if (m_editController.DroppedOnBLock)
+        if (m_droppedOnBlock)
         {
-            switch (m_currentState)
+            switch (CurrentState)
             {
                 case BlockPanel.AvaibleBLocks:
                     m_editController.UpdateBlocksToUse();
 
-                    m_currentState = BlockPanel.Used;
+                    CurrentState = BlockPanel.Used;
                     break;
+
                 case BlockPanel.Used:
 
                     break;
             }
 
-            m_editController.DroppedOnBLock = false;
+            m_droppedOnBlock = false;
 
             return;
         }
 
-        switch (m_currentState)
+        switch (CurrentState)
         {
             case BlockPanel.AvaibleBLocks:
                 if (transform.parent != m_editController.UsedBlocksTransform)
@@ -79,7 +81,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 }
 
                 m_editController.UpdateBlocksToUse();
-                m_currentState = BlockPanel.Used;
+                CurrentState = BlockPanel.Used;
 
                 break;
             case BlockPanel.Used:
@@ -102,8 +104,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         if (block == null) return;
 
         if (!block.CanHaveBlocks) return;
-        
-        m_editController.DroppedOnBLock = true;
+
+        m_droppedOnBlock = true;
 
         UI_Blocks.Add(block);
 
