@@ -35,7 +35,7 @@ public enum BlockPanel
     Used = 2
 }
 
-public enum CurrentBlocksAvaible
+public enum BlockCategory
 {
     RobotActions,
     Variables,

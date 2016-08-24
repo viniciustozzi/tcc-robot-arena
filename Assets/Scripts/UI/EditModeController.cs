@@ -18,16 +18,11 @@ public class EditModeController : MonoBehaviour
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();
         m_usedBlocks = FindObjectOfType<UsedBlocks>();
         m_tabsController = FindObjectOfType<TabsController>();
-
-        #region TESTE
-        //Criação de variaveis para testes:
-        VariableController.DeclareVariable("x", VariableType.Number, 3);
-        VariableController.DeclareVariable("y", VariableType.Number, 1);
-        #endregion
     }
 
-    public void UpdateBlocksToUse()
+    public void ResetBlocksToUse(BlockCategory category)
     {
-        m_tabsController.UpdateBlockGroup();
+        m_toUseBlocks.ResetBlockList(category);
     }
+    
 }

@@ -11,7 +11,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private EditModeController m_editController;
     private static bool m_droppedOnBlock;
 
-    public BlockPanel CurrentState { get; set; }
+
+    //public BlockPanel CurrentState { get; set; }
 
     public virtual bool CanHaveBlocks { get { return false; } }
 
@@ -23,22 +24,23 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         m_editController = FindObjectOfType<EditModeController>();
 
-        CurrentState = BlockPanel.AvaibleBLocks;
+        //CurrentState = BlockPanel.AvaibleBLocks;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        switch (CurrentState)
-        {
-            //Lógica se o bloco está no panel de blocos para se usar
-            case BlockPanel.AvaibleBLocks:
-                m_startPos = transform.position;
-                m_canvasGroup.blocksRaycasts = false;
-                break;
-            //Lógica se o bloco está no panel de blocos usados
-            case BlockPanel.Used:
-                break;
-        }
+        m_startPos = transform.position;
+
+        //switch (CurrentState)
+        //{
+        //    //Lógica se o bloco está no panel de blocos para se usar
+        //    case BlockPanel.AvaibleBLocks:
+        //        m_startPos = transform.position;
+        //        break;
+        //    //Lógica se o bloco está no panel de blocos usados
+        //    case BlockPanel.Used:
+        //        break;
+        //}
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -48,49 +50,47 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        m_canvasGroup.blocksRaycasts = true;
-
         //Se o drag acabou ao colocar um bloco dentro de outro bloco, deve executar sua própria lógica
-        if (m_droppedOnBlock)
-        {
-            switch (CurrentState)
-            {
-                case BlockPanel.AvaibleBLocks:
-                    m_editController.UpdateBlocksToUse();
+        //if (m_droppedOnBlock)
+        //{
+        //    switch (CurrentState)
+        //    {
+        //        case BlockPanel.AvaibleBLocks:
+        //            m_editController.UpdateBlocksToUse();
 
-                    CurrentState = BlockPanel.Used;
-                    break;
+        //            CurrentState = BlockPanel.Used;
+        //            break;
 
-                case BlockPanel.Used:
+        //        case BlockPanel.Used:
 
-                    break;
-            }
+        //            break;
+        //    }
 
-            m_droppedOnBlock = false;
+        //    m_droppedOnBlock = false;
 
-            return;
-        }
+        //    return;
+        //}
 
-        switch (CurrentState)
-        {
-            case BlockPanel.AvaibleBLocks:
-                if (transform.parent != m_editController.UsedBlocksTransform)
-                {
-                    transform.position = m_startPos;
-                    return;
-                }
+        //switch (CurrentState)
+        //{
+        //    case BlockPanel.AvaibleBLocks:
+        //        if (transform.parent != m_editController.UsedBlocksTransform)
+        //        {
+        //            transform.position = m_startPos;
+        //            return;
+        //        }
 
-                m_editController.UpdateBlocksToUse();
-                CurrentState = BlockPanel.Used;
+        //        m_editController.UpdateBlocksToUse();
+        //        CurrentState = BlockPanel.Used;
 
-                break;
-            case BlockPanel.Used:
-                if (transform.parent != m_editController.UsedBlocksTransform)
-                {
-                    Destroy(gameObject);
-                }
-                break;
-        }
+        //        break;
+        //    case BlockPanel.Used:
+        //        if (transform.parent != m_editController.UsedBlocksTransform)
+        //        {
+        //            Destroy(gameObject);
+        //        }
+        //        break;
+        //}
     }
 
     /// <summary>
@@ -103,14 +103,14 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         if (block == null) return;
 
-        if (!block.CanHaveBlocks) return;
+        //if (!block.CanHaveBlocks) return;
 
-        m_droppedOnBlock = true;
+        //m_droppedOnBlock = true;
 
-        UI_Blocks.Add(block);
+        //UI_Blocks.Add(block);
 
-        block.transform.SetParent(transform);
-        block.transform.Reset();
+        //block.transform.SetParent(transform);
+        //block.transform.Reset();
     }
 
     public void SetParent(Transform parent)
