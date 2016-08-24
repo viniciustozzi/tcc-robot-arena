@@ -30,7 +30,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public void OnBeginDrag(PointerEventData eventData)
     {
         m_startPos = transform.position;
-
+        transform.parent = FindObjectOfType<Canvas>().transform;
+        m_canvasGroup.blocksRaycasts = false;
         //switch (CurrentState)
         //{
         //    //Lógica se o bloco está no panel de blocos para se usar
@@ -50,6 +51,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        m_canvasGroup.blocksRaycasts = true;
         //Se o drag acabou ao colocar um bloco dentro de outro bloco, deve executar sua própria lógica
         //if (m_droppedOnBlock)
         //{
