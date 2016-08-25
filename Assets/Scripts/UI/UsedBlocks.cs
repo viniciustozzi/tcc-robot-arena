@@ -17,11 +17,9 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
 
         if (blockComp == null) return;
 
-        //m_editMode.ResetBlocksToUse(blockComp.);
+        blockComp.transform.SetParent(transform);
 
-        //Debug.Log("Dropou: " + eventData.pointerDrag.name);
-
-        blockComp.SetParent(transform);
+        m_editMode.ResetBlocksToUse(blockComp.category);
     }
 
     public void OnExcludeButton()

@@ -6,17 +6,15 @@ using UnityEngine.UI;
 
 public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, I_UIBlock
 {
+    public BlockCategory category;
+
     private Vector3 m_startPos;
     private CanvasGroup m_canvasGroup;
     private EditModeController m_editController;
-    private static bool m_droppedOnBlock;
 
+    public virtual bool CanHaveBlocks { get; set; }
 
-    //public BlockPanel CurrentState { get; set; }
-
-    public virtual bool CanHaveBlocks { get { return false; } }
-
-    public virtual List<UIBlock> UI_Blocks { get { return null; } }
+    public virtual List<UIBlock> UI_Blocks { get; set; }
 
     protected virtual void Awake()
     {
@@ -24,24 +22,13 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         m_editController = FindObjectOfType<EditModeController>();
 
-        //CurrentState = BlockPanel.AvaibleBLocks;
+        UI_Blocks = new List<UIBlock>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         m_startPos = transform.position;
-        transform.parent = FindObjectOfType<Canvas>().transform;
         m_canvasGroup.blocksRaycasts = false;
-        //switch (CurrentState)
-        //{
-        //    //Lógica se o bloco está no panel de blocos para se usar
-        //    case BlockPanel.AvaibleBLocks:
-        //        m_startPos = transform.position;
-        //        break;
-        //    //Lógica se o bloco está no panel de blocos usados
-        //    case BlockPanel.Used:
-        //        break;
-        //}
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -52,47 +39,6 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public void OnEndDrag(PointerEventData eventData)
     {
         m_canvasGroup.blocksRaycasts = true;
-        //Se o drag acabou ao colocar um bloco dentro de outro bloco, deve executar sua própria lógica
-        //if (m_droppedOnBlock)
-        //{
-        //    switch (CurrentState)
-        //    {
-        //        case BlockPanel.AvaibleBLocks:
-        //            m_editController.UpdateBlocksToUse();
-
-        //            CurrentState = BlockPanel.Used;
-        //            break;
-
-        //        case BlockPanel.Used:
-
-        //            break;
-        //    }
-
-        //    m_droppedOnBlock = false;
-
-        //    return;
-        //}
-
-        //switch (CurrentState)
-        //{
-        //    case BlockPanel.AvaibleBLocks:
-        //        if (transform.parent != m_editController.UsedBlocksTransform)
-        //        {
-        //            transform.position = m_startPos;
-        //            return;
-        //        }
-
-        //        m_editController.UpdateBlocksToUse();
-        //        CurrentState = BlockPanel.Used;
-
-        //        break;
-        //    case BlockPanel.Used:
-        //        if (transform.parent != m_editController.UsedBlocksTransform)
-        //        {
-        //            Destroy(gameObject);
-        //        }
-        //        break;
-        //}
     }
 
     /// <summary>
@@ -105,24 +51,26 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         if (block == null) return;
 
-        //if (!block.CanHaveBlocks) return;
-
-        //m_droppedOnBlock = true;
-
-        //UI_Blocks.Add(block);
-
-        //block.transform.SetParent(transform);
-        //block.transform.Reset();
+        if (CanHaveBlocks)
+        {
+            AddToList(block);
+        }
     }
 
-    public void SetParent(Transform parent)
+    public void AddToList(UIBlock block)
     {
-        transform.SetParent(parent);
+        UI_Blocks.Add(block);
+        block.transform.SetParent(transform);
+        block.transform.Reset();
+
+        block.transform.position = new Vector2(transform.position.x + 30, transform.position.y - 40 * UI_Blocks.Count);
+
     }
+
 }
 
 public interface I_UIBlock
 {
-    bool CanHaveBlocks { get; }
-    List<UIBlock> UI_Blocks { get; }
+    bool CanHaveBlocks { get; set; }
+    List<UIBlock> UI_Blocks { get; set; }
 }
