@@ -12,6 +12,9 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private CanvasGroup m_canvasGroup;
     private EditModeController m_editController;
 
+    public bool DropValid { get; set; }
+    public ComeFromWhere FromWhere { get; set; }
+
     public virtual bool CanHaveBlocks { get; set; }
 
     public virtual List<UIBlock> UI_Blocks { get; set; }
@@ -23,12 +26,15 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         m_editController = FindObjectOfType<EditModeController>();
 
         UI_Blocks = new List<UIBlock>();
+
+        FromWhere = ComeFromWhere.ToUseBlocks;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         m_startPos = transform.position;
         m_canvasGroup.blocksRaycasts = false;
+        DropValid = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -38,6 +44,9 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!DropValid)
+            transform.position = m_startPos;
+
         m_canvasGroup.blocksRaycasts = true;
     }
 
@@ -47,6 +56,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
+        DropValid = true;
+
         var block = eventData.pointerDrag.GetComponent<UIBlock>();
 
         if (block == null) return;
@@ -64,9 +75,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         block.transform.Reset();
 
         block.transform.position = new Vector2(transform.position.x + 30, transform.position.y - 40 * UI_Blocks.Count);
-
     }
-
 }
 
 public interface I_UIBlock

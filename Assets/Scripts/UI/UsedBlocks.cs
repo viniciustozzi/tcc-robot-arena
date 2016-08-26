@@ -17,6 +17,8 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
 
         if (blockComp == null) return;
 
+        blockComp.DropValid = true;
+
         blockComp.transform.SetParent(transform);
 
         m_editMode.ResetBlocksToUse(blockComp.category);

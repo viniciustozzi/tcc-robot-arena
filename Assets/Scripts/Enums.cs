@@ -43,3 +43,11 @@ public enum BlockCategory
     Operators,
     Controls
 }
+
+public enum ComeFromWhere
+{
+    None,
+    ToUseBlocks,
+    UsedBlocks,
+    InsideBlock
+}
