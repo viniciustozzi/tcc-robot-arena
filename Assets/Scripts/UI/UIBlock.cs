@@ -57,14 +57,21 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public void OnDrop(PointerEventData eventData)
     {
         DropValid = true;
-
+        
         var block = eventData.pointerDrag.GetComponent<UIBlock>();
 
         if (block == null) return;
-
+        
         if (CanHaveBlocks)
         {
+            block.FromWhere = ComeFromWhere.InsideBlock;
+
             AddToList(block);
+        }
+
+        if (block.FromWhere == ComeFromWhere.InsideBlock)
+        {
+            
         }
     }
 
