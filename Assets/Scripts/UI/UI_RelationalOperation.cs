@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-public class UI_RelationalOperation : MonoBehaviour
+public class UI_RelationalOperation : UIBlock
 {
     public Dropdown drop_varA;
     public Dropdown drop_varB;

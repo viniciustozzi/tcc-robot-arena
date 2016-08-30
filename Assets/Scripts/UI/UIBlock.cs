@@ -7,9 +7,7 @@ using UnityEngine.UI;
 public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public BlockCategory category;
-
-
-
+    
     public bool CanHaveBlocks;
 
     public bool DropValid { get; set; }
