@@ -20,6 +20,13 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
         blockComp.DropValid = true;
 
         blockComp.FromWhere = ComeFromWhere.UsedBlocks;
+        
+        //O bloco veio de dentro de outro bloco?
+        if (blockComp.FromWhere == ComeFromWhere.InsideBlock)
+        {
+            //Remove o bloco de dentro do bloco de onde ele veio (exemplo: MoveAhead dentro de um While)
+            blockComp.LastParent.RemoveFromList(blockComp);
+        }
 
         blockComp.transform.SetParent(transform);
 

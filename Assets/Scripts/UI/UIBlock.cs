@@ -4,20 +4,24 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI;
 
-public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, I_UIBlock
+public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public BlockCategory category;
 
-    private Vector3 m_startPos;
-    private CanvasGroup m_canvasGroup;
-    private EditModeController m_editController;
+
+
+    public bool CanHaveBlocks;
 
     public bool DropValid { get; set; }
     public ComeFromWhere FromWhere { get; set; }
 
-    public virtual bool CanHaveBlocks { get; set; }
-
     public virtual List<UIBlock> UI_Blocks { get; set; }
+    public UIBlock LastParent { get; set; }
+
+    private Vector3 m_startPos;
+    private CanvasGroup m_canvasGroup;
+    private EditModeController m_editController;
+    private Transform m_layoutGroup;
 
     protected virtual void Awake()
     {
@@ -28,6 +32,17 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         UI_Blocks = new List<UIBlock>();
 
         FromWhere = ComeFromWhere.ToUseBlocks;
+
+        getLayoutGroupReference();
+    }
+
+    //Guarda a referência do layout group se esse for um bloco que pode ter outros blocos dentro dele
+    private void getLayoutGroupReference()
+    {
+        VerticalLayoutGroup group = transform.GetComponentInChildren<VerticalLayoutGroup>();
+
+        if (group != null)
+            m_layoutGroup = group.transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -35,6 +50,10 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         m_startPos = transform.position;
         m_canvasGroup.blocksRaycasts = false;
         DropValid = false;
+
+        //Se no início do drag, esse bloco estiver dentro de outro bloco, 
+        if (FromWhere == ComeFromWhere.InsideBlock)
+            LastParent = transform.GetComponent<UIBlock>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -57,36 +76,41 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public void OnDrop(PointerEventData eventData)
     {
         DropValid = true;
-        
+
         var block = eventData.pointerDrag.GetComponent<UIBlock>();
 
         if (block == null) return;
-        
+
+        //O bloco veio de dentro de outro bloco?
+        if (block.FromWhere == ComeFromWhere.InsideBlock)
+        {
+            //Remove o bloco de dentro do bloco de onde ele veio (exemplo: MoveAhead dentro de um While)
+            block.LastParent.RemoveFromList(block);
+        }
+
+        //Esse bloco pode ter blocos dentro dele?
         if (CanHaveBlocks)
         {
             block.FromWhere = ComeFromWhere.InsideBlock;
 
             AddToList(block);
         }
+    }
 
-        if (block.FromWhere == ComeFromWhere.InsideBlock)
-        {
-            
-        }
+    private void addToVerticalLayout(Transform block)
+    {
+        block.SetParent(m_layoutGroup);
     }
 
     public void AddToList(UIBlock block)
     {
         UI_Blocks.Add(block);
-        block.transform.SetParent(transform);
+        addToVerticalLayout(block.transform);
         block.transform.Reset();
-
-        block.transform.position = new Vector2(transform.position.x + 30, transform.position.y - 40 * UI_Blocks.Count);
     }
-}
 
-public interface I_UIBlock
-{
-    bool CanHaveBlocks { get; set; }
-    List<UIBlock> UI_Blocks { get; set; }
+    public void RemoveFromList(UIBlock block)
+    {
+        UI_Blocks.Remove(block);
+    }
 }

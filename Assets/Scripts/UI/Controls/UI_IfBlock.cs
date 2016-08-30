@@ -9,12 +9,9 @@ public class UI_IfBlock : UIBlock
 
     protected override void Awake()
     {
-        base.Awake();
-    }
+        CanHaveBlocks = true;
 
-    public override bool CanHaveBlocks
-    {
-        get { return true; }
+        base.Awake();
     }
 
 }
