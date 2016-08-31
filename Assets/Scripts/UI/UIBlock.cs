@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public BlockCategory category;
-    
+
     public bool CanHaveBlocks;
 
     public bool DropValid { get; set; }
@@ -71,27 +71,38 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     /// If a UIBlock is dropped inside a UIBlock, it must be treated to add this UIblock if is possivel
     /// </summary>
     /// <param name="eventData"></param>
-    public void OnDrop(PointerEventData eventData)
+    public virtual void OnDrop(PointerEventData eventData)
     {
         DropValid = true;
 
+        checkDropBlock(eventData);
+    }
+
+    private void checkBoolOperationDrop(PointerEventData eventData)
+    {
+        var boolOperation = eventData.pointerDrag.GetComponent<RelationalOperation>();
+    }
+
+    //Se quem foi dropado nesse bloco foi um outro bloco simples (não operação relacional ou lógica)
+    private void checkDropBlock(PointerEventData eventData)
+    {
         var block = eventData.pointerDrag.GetComponent<UIBlock>();
 
-        if (block == null) return;
-
-        //O bloco veio de dentro de outro bloco?
-        if (block.FromWhere == ComeFromWhere.InsideBlock)
+        if (block != null)
         {
-            //Remove o bloco de dentro do bloco de onde ele veio (exemplo: MoveAhead dentro de um While)
-            block.LastParent.RemoveFromList(block);
-        }
+            //O bloco veio de dentro de outro bloco?
+            if (block.FromWhere == ComeFromWhere.InsideBlock)
+            {
+                //Remove o bloco de dentro do bloco de onde ele veio (exemplo: MoveAhead dentro de um While)
+                block.LastParent.RemoveFromList(block);
+            }
 
-        //Esse bloco pode ter blocos dentro dele?
-        if (CanHaveBlocks)
-        {
-            block.FromWhere = ComeFromWhere.InsideBlock;
-
-            AddToList(block);
+            //Esse bloco pode ter blocos dentro dele? (Se sim significa que é um If, While etc...
+            if (CanHaveBlocks)
+            {
+                block.FromWhere = ComeFromWhere.InsideBlock;
+                AddToList(block);
+            }
         }
     }
 
