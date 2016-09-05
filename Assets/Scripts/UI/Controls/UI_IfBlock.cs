@@ -6,8 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UI_IfBlock : UIBlock
 {
-    public List<UI_RelationalOperation> BooleanExpressions;
-    public HorizontalLayoutGroup horizontalLayout;
+    public List<UI_BoolOperation> BooleanExpressions;
 
     protected override void Awake()
     {

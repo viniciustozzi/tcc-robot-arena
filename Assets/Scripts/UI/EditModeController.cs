@@ -15,6 +15,11 @@ public class EditModeController : MonoBehaviour
 
     void Awake()
     {
+        VariableController.ClearAllVariables();
+        VariableController.DeclareVariable("VarA", VariableType.Number, 1);
+        VariableController.DeclareVariable("VarB", VariableType.Bool, true);
+        VariableController.DeclareVariable("VarC", VariableType.String, "var string");
+
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();
         m_usedBlocks = FindObjectOfType<UsedBlocks>();
         m_tabsController = FindObjectOfType<TabsController>();
@@ -24,5 +29,5 @@ public class EditModeController : MonoBehaviour
     {
         m_toUseBlocks.ResetBlockList(category);
     }
-    
+
 }

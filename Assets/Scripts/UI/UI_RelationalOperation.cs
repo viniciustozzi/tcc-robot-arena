@@ -22,7 +22,7 @@ public class UI_RelationalOperation : UIBlock
         fillOperatorsInfo();
     }
 
-    public RelationalOperation GetBooleanExpression()
+    public RelationalOperation GetRelationalOperation()
     {
         RelationalOperator opType = (RelationalOperator)Enum.Parse(typeof(RelationalOperator), drop_operationType.captionText.text);
 

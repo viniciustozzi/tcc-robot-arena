@@ -19,6 +19,11 @@ public static class VariableController
         Variables.Add(name, varInfo);
     }
 
+    public static void ClearAllVariables()
+    {
+        Variables.Clear();
+    }
+
     public static void SetValue(string varName, object value)
     {
         Variables[varName].Value = value;

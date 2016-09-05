@@ -9,6 +9,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public BlockCategory category;
 
     public bool CanHaveBlocks;
+    public bool Draggable = true;
 
     public bool DropValid { get; set; }
     public ComeFromWhere FromWhere { get; set; }
@@ -45,6 +46,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!Draggable) return;
+
         m_startPos = transform.position;
         m_canvasGroup.blocksRaycasts = false;
         DropValid = false;
