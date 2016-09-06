@@ -8,6 +8,8 @@ public class RobotAnalyser : MonoBehaviour
     private GameObject m_robot;
     public GameObject prefab;
 
+    public List<UIBlock> UIBlocksList { get; set; }
+    
     void Start()
     {
         m_robot = new GameObject();

@@ -8,6 +8,14 @@ public class UI_MoveAhead : UIBlock
 {
     public InputField input_distance;
 
+    private MoveAhead m_moveAhead;
+
+    public MoveAhead GetMoveAheadBlock()
+    {
+        m_moveAhead.Distance = Distance;
+        return m_moveAhead;
+    }
+
     public int Distance
     {
         get

@@ -47,11 +47,12 @@ public class UI_BoolOperation : UIBlock
         };
     }
 
-    public void GetBooleanExpression()
+    public BoolOperation GetBoolOperation()
     {
-        if (m_logicalOperations.Count > 0)
-        {
-            
-        }
+        List<LogicalOperation> logicalOps = new List<LogicalOperation>();
+
+        m_logicalOperations.ForEach(x => logicalOps.Add(x.GetLogicalOperation()));
+
+        return new BoolOperation(logicalOps, m_relationalOp.GetRelationalOperation());
     }
 }

@@ -4,8 +4,6 @@ using System;
 
 public class EditModeController : MonoBehaviour
 {
-    public List<UIBlock> UIBlocks;
-
     private ToUseBlocks m_toUseBlocks;
     private UsedBlocks m_usedBlocks;
     private TabsController m_tabsController;
@@ -23,6 +21,13 @@ public class EditModeController : MonoBehaviour
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();
         m_usedBlocks = FindObjectOfType<UsedBlocks>();
         m_tabsController = FindObjectOfType<TabsController>();
+    }
+
+    public void SaveRobot()
+    {
+        //É necessário pegar a raiz (onde começa) o algoritmo do robo
+        var root = FindObjectOfType<OnBegin>();
+        var x = root.UI_Blocks;
     }
 
     public void ResetBlocksToUse(BlockCategory category)
