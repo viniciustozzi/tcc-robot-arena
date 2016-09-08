@@ -136,10 +136,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         if (CanHaveBlocks)
         {
-            foreach (var uiBlock in UI_Blocks)
-            {
-                blocks.AddRange(uiBlock.GetLogicBlockStructure());
-            }
+            
         }
 
         return blocks;

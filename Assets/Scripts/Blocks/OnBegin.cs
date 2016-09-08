@@ -8,5 +8,6 @@ public class OnBegin : UIBlock
     {
         ExecuteCycle cycle = new ExecuteCycle();
         
+        return cycle;
     }
 }
