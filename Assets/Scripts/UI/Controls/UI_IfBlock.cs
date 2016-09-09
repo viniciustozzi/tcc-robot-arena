@@ -14,4 +14,10 @@ public class UI_IfBlock : UIBlock
 
         base.Awake();
     }
+
+    protected override AbstractBlock SetupBlockInfo()
+    {
+        //GameObject go = new GameObject();
+        //go.
+    }
 }

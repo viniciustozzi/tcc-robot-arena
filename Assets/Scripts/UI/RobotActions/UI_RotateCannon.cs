@@ -10,7 +10,10 @@ public class UI_RotateCannon : UIBlock
     {
         GameObject go = new GameObject();
         go.name = "RotateCannon";
-        //var rotateCannon = go.AddComponent<Cann>
+        var rotateCannon = go.AddComponent<CannonRotate>();
+        rotateCannon.Degrees = Angle;
+
+        return rotateCannon;
     }
 
     public int Angle
