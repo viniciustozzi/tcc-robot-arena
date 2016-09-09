@@ -17,6 +17,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public virtual List<UIBlock> UI_Blocks { get; set; }
     public UIBlock LastParent { get; set; }
 
+    protected IBlock m_blockStructure;
+
     private Vector3 m_startPos;
     private CanvasGroup m_canvasGroup;
     private EditModeController m_editController;
@@ -125,4 +127,38 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         UI_Blocks.Remove(block);
     }
+
+    public List<IBlock> GetLogicBlockStructure()
+    {
+        List<IBlock> blocks = new List<IBlock>();
+
+        blocks.Add(getBlockInfo());
+
+        if (CanHaveBlocks)
+        {
+            foreach (var uiBlock in UI_Blocks)
+            {
+                blocks.AddRange(uiBlock.GetLogicBlockStructure());
+            }
+        }
+
+        return blocks;
+    }
+
+    private IBlock getBlockInfo()
+    {
+        if (this is OnBegin)
+            return ((OnBegin)this).SetupBlockInfo();
+
+        if (this is UI_MoveAhead)
+            return ((UI_MoveAhead)this).SetupBlockInfo();
+
+        return null;
+    }
+
+    protected virtual IBlock SetupBlockInfo()
+    {
+        return null;
+    }
+
 }

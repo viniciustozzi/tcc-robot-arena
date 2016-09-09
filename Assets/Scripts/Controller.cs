@@ -28,4 +28,6 @@ public class Controller : MonoBehaviour
             return controller;       
         }
     }
+
+    public static GameObject ROBOT_EDIT;
 }

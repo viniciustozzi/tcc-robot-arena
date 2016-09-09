@@ -5,9 +5,7 @@ using System;
 public class ExecuteCycle : MonoBehaviour, IBlock
 {
     public List<IBlock> LogicBlocks { get; set; }
-
-
-
+    
     private Action m_callback;
     private int m_index;
 
