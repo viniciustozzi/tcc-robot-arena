@@ -28,6 +28,7 @@ public class EditModeController : MonoBehaviour
         //É necessário pegar a raiz (onde começa) o algoritmo do robo
         var root = FindObjectOfType<OnBegin>();
         var x = root.GetLogicBlockStructure();
+
         Debug.Log(x);
     }
 

@@ -18,6 +18,9 @@ public class UI_IfBlock : UIBlock
     protected override AbstractBlock SetupBlockInfo()
     {
         //GameObject go = new GameObject();
-        //go.
+        //go.name = "If";
+        //var ifComp = go.AddComponent<If>();
+
+        throw new NotImplementedException();
     }
 }

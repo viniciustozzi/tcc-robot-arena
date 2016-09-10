@@ -73,12 +73,12 @@ public class Robot : MonoBehaviour
 
 	private void executeAllActions()
 	{
-		if (m_components[m_currentAction] is RobotMove)
-			((RobotMove)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
-		else if (m_components[m_currentAction] is RobotRotate)
-			((RobotRotate)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
-		else if (m_components[m_currentAction] is RobotShot)
-			((RobotShot)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
+		//if (m_components[m_currentAction] is RobotMove)
+		//	((RobotMove)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
+		//else if (m_components[m_currentAction] is RobotRotate)
+		//	((RobotRotate)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
+		//else if (m_components[m_currentAction] is RobotShot)
+		//	((RobotShot)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
 		
 		m_robotActions[m_currentAction].Invoke();
 	}
