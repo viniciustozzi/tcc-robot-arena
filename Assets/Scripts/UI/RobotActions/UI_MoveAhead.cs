@@ -8,17 +8,16 @@ public class UI_MoveAhead : UIBlock
 {
     public InputField input_distance;
 
-    protected override IBlock SetupBlockInfo()
+    protected override AbstractBlock SetupBlockInfo()
     {
-        Debug.Log("to no moveAhead");
-
         GameObject go = new GameObject();
+        go.name = "MoveAhead";
         var move = go.AddComponent<MoveAhead>();
         move.Distance = Distance;
 
         return move;
     }
-    
+
     public int Distance
     {
         get

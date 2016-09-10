@@ -6,6 +6,13 @@ public class UI_RotateCannon : UIBlock
 {
     public InputField input_angle;
 
+    protected override AbstractBlock SetupBlockInfo()
+    {
+        GameObject go = new GameObject();
+        go.name = "RotateCannon";
+        //var rotateCannon = go.AddComponent<Cann>
+    }
+
     public int Angle
     {
         get

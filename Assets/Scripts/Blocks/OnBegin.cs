@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class OnBegin : UIBlock
 {
-    protected override IBlock SetupBlockInfo()
+    protected override AbstractBlock SetupBlockInfo()
     {
-        ExecuteCycle cycle = new ExecuteCycle();
-        
+        GameObject go = new GameObject();
+        go.name = "ExecuteCycle";
+        ExecuteCycle cycle = go.AddComponent<ExecuteCycle>();
+
         return cycle;
     }
 }

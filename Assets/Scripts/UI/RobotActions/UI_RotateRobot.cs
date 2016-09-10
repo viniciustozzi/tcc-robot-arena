@@ -6,6 +6,16 @@ public class UI_RotateRobot : UIBlock
 {
     public InputField input_angle;
 
+    protected override AbstractBlock SetupBlockInfo()
+    {
+        GameObject go = new GameObject();
+        go.name = "RotateRobot";
+        var rotateRobot = go.AddComponent<RobotRotate>();
+        rotateRobot.Degrees = Angle;
+
+        return rotateRobot;
+    }
+
     public int Angle
     {
         get

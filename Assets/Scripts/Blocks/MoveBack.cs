@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
-public class MoveBack : MonoBehaviour, IBlock {
+public class MoveBack : AbstractBlock {
 
     private Action m_onFinishMove;
     private Rigidbody m_rigidbody;
@@ -14,7 +15,9 @@ public class MoveBack : MonoBehaviour, IBlock {
     /// The distance that the robot will move
     /// </summary>
     public float Distance { get; set; }
-    
+
+    public override List<AbstractBlock> LogicBlocks { get; set; }
+
     void FixedUpdate()
     {
         if (m_move)
@@ -39,12 +42,12 @@ public class MoveBack : MonoBehaviour, IBlock {
         }
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Run(Action callback)
+    public override void Run(Action callback)
     {
         m_onFinishMove = callback;
 

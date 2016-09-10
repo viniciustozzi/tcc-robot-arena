@@ -17,7 +17,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public virtual List<UIBlock> UI_Blocks { get; set; }
     public UIBlock LastParent { get; set; }
 
-    protected IBlock m_blockStructure;
+    protected AbstractBlock m_blockStructure;
 
     private Vector3 m_startPos;
     private CanvasGroup m_canvasGroup;
@@ -83,11 +83,6 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         checkDropBlock(eventData);
     }
 
-    private void checkBoolOperationDrop(PointerEventData eventData)
-    {
-        var boolOperation = eventData.pointerDrag.GetComponent<RelationalOperation>();
-    }
-
     //Se quem foi dropado nesse bloco foi um outro bloco simples (não operação relacional ou lógica)
     private void checkDropBlock(PointerEventData eventData)
     {
@@ -128,32 +123,51 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         UI_Blocks.Remove(block);
     }
 
-    public List<IBlock> GetLogicBlockStructure()
+    public AbstractBlock GetLogicBlockStructure()
     {
-        List<IBlock> blocks = new List<IBlock>();
-
-        blocks.Add(getBlockInfo());
+        AbstractBlock thisBlockStructure = getBlockInfo();
 
         if (CanHaveBlocks)
         {
-            
+            List<AbstractBlock> childrenBlocks = new List<AbstractBlock>();
+
+            foreach (var uiBlock in UI_Blocks)
+            {
+                AbstractBlock childBlock = uiBlock.GetLogicBlockStructure();
+                childrenBlocks.Add(childBlock);
+            }
+
+            thisBlockStructure.LogicBlocks.AddRange(childrenBlocks);
         }
 
-        return blocks;
+        return thisBlockStructure;
     }
 
-    private IBlock getBlockInfo()
+    private AbstractBlock getBlockInfo()
     {
         if (this is OnBegin)
             return ((OnBegin)this).SetupBlockInfo();
-
-        if (this is UI_MoveAhead)
+        else if (this is UI_MoveAhead)
             return ((UI_MoveAhead)this).SetupBlockInfo();
+        else if (this is UI_MoveBack)
+            return ((UI_MoveBack)this).SetupBlockInfo();
+        else if (this is UI_RotateRobot)
+            return ((UI_RotateRobot)this).SetupBlockInfo();
+        else if (this is UI_RotateCannon)
+            return ((UI_RotateCannon)this).SetupBlockInfo();
+        else if (this is UI_Shoot)
+            return ((UI_Shoot)this).SetupBlockInfo();
+        else if (this is UI_IfBlock)
+            return ((UI_IfBlock)this).SetupBlockInfo();
+        else if (this is UI_WhileBlock)
+            return ((UI_WhileBlock)this).SetupBlockInfo();
+        else if (this is UI_WhileBlock)
+            return ((UI_WhileBlock)this).SetupBlockInfo();
 
         return null;
     }
 
-    protected virtual IBlock SetupBlockInfo()
+    protected virtual AbstractBlock SetupBlockInfo()
     {
         return null;
     }

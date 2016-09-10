@@ -31,7 +31,7 @@ public class RobotAnalyser : MonoBehaviour
         VariableController.DeclareVariable("y", VariableType.Number, 1);
 
         var ifComponent = m_robot.AddComponent<If>();
-        ifComponent.LogicBlocks = new List<IBlock>();
+        ifComponent.LogicBlocks = new List<AbstractBlock>();
         ifComponent.condicao = new RelationalOperation("x", "y", RelationalOperator.Less);
 
         var moveBack = m_robot.AddComponent<MoveBack>();

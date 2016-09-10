@@ -25,17 +25,14 @@ public class EditModeController : MonoBehaviour
 
     public void SaveRobot()
     {
-        Controller.ROBOT_EDIT = new GameObject();
-        Controller.ROBOT_EDIT.name = "Robot_In_Edition";
-
         //É necessário pegar a raiz (onde começa) o algoritmo do robo
         var root = FindObjectOfType<OnBegin>();
         var x = root.GetLogicBlockStructure();
+        Debug.Log(x);
     }
 
     public void ResetBlocksToUse(BlockCategory category)
     {
         m_toUseBlocks.ResetBlockList(category);
     }
-
 }

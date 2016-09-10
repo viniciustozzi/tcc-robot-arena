@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
-public class MoveAhead : MonoBehaviour, IBlock
+public class MoveAhead : AbstractBlock
 {
     private Action m_onFinishMove;
     private Rigidbody m_rigidbody;
@@ -14,6 +15,8 @@ public class MoveAhead : MonoBehaviour, IBlock
     /// The distance that the robot will move
     /// </summary>
     public float Distance { get; set; }
+
+    public override List<AbstractBlock> LogicBlocks { get; set; }
 
     void Start()
     {
@@ -46,12 +49,12 @@ public class MoveAhead : MonoBehaviour, IBlock
         }
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
         
     }
 
-    public void Run(Action callback)
+    public override void Run(Action callback)
     {
         m_onFinishMove = callback;
 

@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class While : MonoBehaviour, IBlock
+public class While : AbstractBlock
 {
-    public List<IBlock> LogicBlocks;
     public RelationalOperation expression;
     private Action m_callback;
 
     private int m_index;
 
-    public void Initialize()
+    public override List<AbstractBlock> LogicBlocks { get; set; }
+
+    public override void Initialize()
     {
         m_index = 0;
 
         LogicBlocks.ForEach(x => x.Initialize());
     }
 
-    public void Run(Action blockCallback)
+    public override void Run(Action blockCallback)
     {
         m_callback = blockCallback;
 

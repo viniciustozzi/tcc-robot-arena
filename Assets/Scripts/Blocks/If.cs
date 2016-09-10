@@ -2,29 +2,29 @@
 using UnityEngine;
 using System;
 
-public class If : MonoBehaviour, IBlock
+public class If : AbstractBlock
 {
     public RelationalOperation condicao;
 
     private Action m_callback;
 
-    public List<IBlock> LogicBlocks { get; set; }
+    public override List<AbstractBlock> LogicBlocks { get; set; }
 
 	private int m_index;
 
     void Awake()
     {
-        LogicBlocks = new List<IBlock>();
+        LogicBlocks = new List<AbstractBlock>();
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
 		m_index = 0;
 
         LogicBlocks.ForEach(x => x.Initialize());
     }
 
-    public void Run(Action callback)
+    public override void Run(Action callback)
     {
         m_callback = callback;
         m_index = 0;

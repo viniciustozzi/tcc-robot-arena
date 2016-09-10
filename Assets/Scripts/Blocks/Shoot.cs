@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
-public class Shoot : MonoBehaviour, IBlock
+using System.Collections.Generic;
+
+public class Shoot : AbstractBlock
 {
     public Transform shotTransform;
 
@@ -9,7 +11,9 @@ public class Shoot : MonoBehaviour, IBlock
     private GameObject m_shotPrefab;
     private Action m_callback;
 
-    public void Initialize()
+    public override List<AbstractBlock> LogicBlocks { get; set; }
+
+    public override void Initialize()
     {
         LoadShotPrefab();
 
@@ -17,7 +21,7 @@ public class Shoot : MonoBehaviour, IBlock
         m_cooldownTime = 1.5f;
     }
 
-    public void Run(Action blockCallback)
+    public override void Run(Action blockCallback)
     {
         m_callback = blockCallback;
 

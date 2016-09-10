@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
-public interface IBlock
+public abstract class AbstractBlock : MonoBehaviour
 {
-	void Initialize();
+	public abstract void Initialize();
 	
-	void Run(Action blockCallback);
+	public abstract void Run(Action blockCallback);
 
-
+    public abstract List<AbstractBlock> LogicBlocks { get; set; }
 }

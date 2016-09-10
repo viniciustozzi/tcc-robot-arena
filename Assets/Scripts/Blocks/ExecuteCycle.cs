@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System;
 
-public class ExecuteCycle : MonoBehaviour, IBlock
+public class ExecuteCycle : AbstractBlock
 {
-    public List<IBlock> LogicBlocks { get; set; }
+    public override List<AbstractBlock> LogicBlocks { get; set; }
     
     private Action m_callback;
     private int m_index;
 
     void Awake()
     {
-        LogicBlocks = new List<IBlock>();
+        LogicBlocks = new List<AbstractBlock>();
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
         LogicBlocks.ForEach(x => x.Initialize());
     }
 
-    public void Run(Action blockCallback)
+    public override void Run(Action blockCallback)
     {
         m_callback = blockCallback;
 

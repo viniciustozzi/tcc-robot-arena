@@ -6,6 +6,16 @@ public class UI_MoveBack : UIBlock
 {
     public InputField input_distance;
 
+    protected override AbstractBlock SetupBlockInfo()
+    {
+        GameObject go = new GameObject();
+        go.name = "MoveBack";
+        var move = go.AddComponent<MoveBack>();
+        move.Distance = Distance;
+
+        return move;
+    }
+
     public int Distance
     {
         get
