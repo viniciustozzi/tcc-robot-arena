@@ -12,9 +12,6 @@ public class UI_BoolOperation : UIBlock
 
     protected override void Awake()
     {
-        m_logicalOperations = new List<UI_LogicalOperation>();
-        m_relationalOp = new UI_RelationalOperation();
-
         m_horizontalGroup = GetComponent<HorizontalLayoutGroup>();
 
         base.Awake();

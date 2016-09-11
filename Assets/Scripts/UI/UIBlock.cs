@@ -104,6 +104,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 AddToList(block);
             }
         }
+
+        Debug.Log("OnDrop: " + this.gameObject.name + " : " + UI_Blocks.Count);
     }
 
     private void addToVerticalLayout(Transform block)
@@ -130,6 +132,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         if (CanHaveBlocks)
         {
             List<AbstractBlock> childrenBlocks = new List<AbstractBlock>();
+
+            Debug.Log("GetLogiStructure:" + this.gameObject.name + " : " + UI_Blocks.Count);
 
             foreach (var uiBlock in UI_Blocks)
             {

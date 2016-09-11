@@ -5,65 +5,21 @@ using System.Linq;
 
 public class RobotAnalyser : MonoBehaviour
 {
-    private GameObject m_robot;
-    public GameObject prefab;
-
     public List<UIBlock> UIBlocksList { get; set; }
-    
-    void Start()
+
+    public void TestRobot(ExecuteCycle testCycle)
     {
-        m_robot = new GameObject();
+        GameObject robot = new GameObject();
 
-        addchild();
-
-        m_robot.name = "ROBO";
-        var rigidbody = m_robot.AddComponent<Rigidbody>();
+        robot.name = "ROBO";
+        var rigidbody = robot.AddComponent<Rigidbody>();
         rigidbody.useGravity = false;
 
-        m_robot.AddComponent(typeof(ExecuteCycle));
+        ExecuteCycle myCycle = (ExecuteCycle)robot.AddComponent(typeof(ExecuteCycle));
+        myCycle = testCycle;
 
-        var executeComponent = m_robot.GetComponent<ExecuteCycle>();
+        myCycle.Initialize();
 
-        var moveAhead = m_robot.AddComponent<MoveAhead>();
-        moveAhead.Distance = 20;
-
-        VariableController.DeclareVariable("x", VariableType.Number, 3);
-        VariableController.DeclareVariable("y", VariableType.Number, 1);
-
-        var ifComponent = m_robot.AddComponent<If>();
-        ifComponent.LogicBlocks = new List<AbstractBlock>();
-        ifComponent.condicao = new RelationalOperation("x", "y", RelationalOperator.Less);
-
-        var moveBack = m_robot.AddComponent<MoveBack>();
-        moveBack.Distance = 10;
-
-        //var whileComp = m_robot.AddComponent<While>();
-        //whileComp.LogicBlocks = new List<IBlock>();
-        //whileComp.expression = new BooleanExpression("x", "y", BooleanOperator.Less);
-        //var shotComp = m_robot.AddComponent<Shoot>();
-        //whileComp.LogicBlocks.Add(shotComp);
-
-        ifComponent.LogicBlocks.Add(moveBack);
-        executeComponent.LogicBlocks.Add(ifComponent);
-        //executeComponent.LogicBlocks.Add(moveAhead);
-
-        //executeComponent.LogicBlocks.Add(whileComp);
-
-        executeComponent.Initialize();
-
-        executeComponent.Run(null);
-    }
-
-    private void metodoDeJesus()
-    {
-        Debug.Log("andou jesus");
-    }
-
-    private void addchild()
-    {
-        var go = (GameObject)GameObject.Instantiate(prefab, m_robot.transform.position, Quaternion.identity);
-        go.transform.parent = m_robot.transform;
-        go.transform.localPosition = new Vector3(0, 0, 0);
-        go.transform.localScale = new Vector3(1, 1, 1);
+        myCycle.Run(null);
     }
 }
