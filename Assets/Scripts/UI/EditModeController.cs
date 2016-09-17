@@ -30,6 +30,7 @@ public class EditModeController : MonoBehaviour
 
     public void SaveRobot()
     {
+        Controller.Instance.CURRENT_ROBOT = new GameObject();
         //É necessário pegar a raiz (onde começa) o algoritmo do robo
         var root = FindObjectOfType<OnBegin>();
 

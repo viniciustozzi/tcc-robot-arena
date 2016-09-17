@@ -29,5 +29,5 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public static GameObject ROBOT_EDIT;
+    public GameObject CURRENT_ROBOT;
 }

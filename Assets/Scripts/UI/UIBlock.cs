@@ -133,7 +133,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         {
             List<AbstractBlock> childrenBlocks = new List<AbstractBlock>();
 
-            Debug.Log("GetLogiStructure:" + this.gameObject.name + " : " + UI_Blocks.Count);
+            Debug.Log("GetLogiStructure:" + gameObject.name + " : " + UI_Blocks.Count);
 
             foreach (var uiBlock in UI_Blocks)
             {

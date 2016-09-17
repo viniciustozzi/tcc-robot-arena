@@ -5,17 +5,15 @@ using System.Linq;
 
 public class RobotAnalyser : MonoBehaviour
 {
-    public List<UIBlock> UIBlocksList { get; set; }
-
+    
     public void TestRobot(ExecuteCycle testCycle)
     {
-        GameObject robot = new GameObject();
-
-        robot.name = "ROBO";
-        var rigidbody = robot.AddComponent<Rigidbody>();
+        Controller.Instance.CURRENT_ROBOT.name = "ROBO";
+        var rigidbody = Controller.Instance.CURRENT_ROBOT.AddComponent<Rigidbody>();
         rigidbody.useGravity = false;
 
-        ExecuteCycle myCycle = (ExecuteCycle)robot.AddComponent(typeof(ExecuteCycle));
+        ExecuteCycle myCycle = (ExecuteCycle)Controller.Instance.CURRENT_ROBOT.AddComponent(typeof(ExecuteCycle));
+
         myCycle = testCycle;
 
         myCycle.Initialize();

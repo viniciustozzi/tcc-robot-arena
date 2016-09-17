@@ -8,9 +8,9 @@ public class UI_MoveBack : UIBlock
 
     protected override AbstractBlock SetupBlockInfo()
     {
-        GameObject go = new GameObject();
-        go.name = "MoveBack";
-        var move = go.AddComponent<MoveBack>();
+        //GameObject go = new GameObject();
+        Controller.Instance.CURRENT_ROBOT.name = "MoveBack";
+        var move = Controller.Instance.CURRENT_ROBOT.AddComponent<MoveBack>();
         move.Distance = Distance;
 
         return move;

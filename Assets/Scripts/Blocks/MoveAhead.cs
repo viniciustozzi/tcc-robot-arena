@@ -37,7 +37,7 @@ public class MoveAhead : AbstractBlock
 
             else
             {
-                Debug.Log("Androu tudo que tinha que andar");
+                Debug.Log("Andou tudo que tinha que andar");
 
                 //Reseta a velocidade do robo para 0
                 resetVelocity();

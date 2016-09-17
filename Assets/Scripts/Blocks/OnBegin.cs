@@ -10,6 +10,8 @@ public class OnBegin : UIBlock
         go.name = "ExecuteCycle";
         ExecuteCycle cycle = go.AddComponent<ExecuteCycle>();
 
+        Destroy(go);
+
         return cycle;
     }
 }

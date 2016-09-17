@@ -8,9 +8,9 @@ public class UI_RotateCannon : UIBlock
 
     protected override AbstractBlock SetupBlockInfo()
     {
-        GameObject go = new GameObject();
-        go.name = "RotateCannon";
-        var rotateCannon = go.AddComponent<CannonRotate>();
+        //GameObject go = new GameObject();
+        Controller.Instance.CURRENT_ROBOT.name = "RotateCannon";
+        var rotateCannon = Controller.Instance.CURRENT_ROBOT.AddComponent<CannonRotate>();
         rotateCannon.Degrees = Angle;
 
         return rotateCannon;
