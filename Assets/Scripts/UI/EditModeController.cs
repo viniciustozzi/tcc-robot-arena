@@ -5,6 +5,10 @@ using Newtonsoft.Json;
 
 public class EditModeController : MonoBehaviour
 {
+    public GameObject editCanvas;
+    public GameObject robotPrefab;
+    public Transform initialTransform;
+
     private RobotAnalyser m_robotAnalyser;
 
     private ToUseBlocks m_toUseBlocks;
@@ -30,7 +34,8 @@ public class EditModeController : MonoBehaviour
 
     public void SaveRobot()
     {
-        Controller.Instance.CURRENT_ROBOT = new GameObject();
+        Controller.Instance.CURRENT_ROBOT = (GameObject)Instantiate(robotPrefab, initialTransform.position, Quaternion.identity);
+
         //É necessário pegar a raiz (onde começa) o algoritmo do robo
         var root = FindObjectOfType<OnBegin>();
 
@@ -42,9 +47,10 @@ public class EditModeController : MonoBehaviour
         if (robotCycle.LogicBlocks.Count <= 0)
         {
             Debug.Log("DEU 0 NO ESQUEMA!");
-            Debug.Break();
+            return;
         }
 
+        editCanvas.SetActive(false);
         m_robotAnalyser.TestRobot(robotCycle);
     }
 

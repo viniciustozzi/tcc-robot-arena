@@ -5,7 +5,6 @@ using System.Linq;
 
 public class RobotAnalyser : MonoBehaviour
 {
-    
     public void TestRobot(ExecuteCycle testCycle)
     {
         Controller.Instance.CURRENT_ROBOT.name = "ROBO";

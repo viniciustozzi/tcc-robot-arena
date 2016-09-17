@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Shoot : AbstractBlock
 {
-    public Transform shotTransform;
+    private Transform shotTransform;
 
     private float m_cooldownTime;
     private float m_speed;
@@ -15,10 +15,12 @@ public class Shoot : AbstractBlock
 
     public override void Initialize()
     {
-        LoadShotPrefab();
-
         m_speed = 30f;
         m_cooldownTime = 1.5f;
+        
+        LoadShotPrefab();
+
+        shotTransform = transform.FindChild("posShot");
     }
 
     public override void Run(Action blockCallback)
@@ -32,7 +34,7 @@ public class Shoot : AbstractBlock
 
     public void LoadShotPrefab()
     {
-        m_shotPrefab = Resources.Load<GameObject>("Prefabs/RobotShot");
+        m_shotPrefab = Resources.Load<GameObject>("Prefabs/ShotPrefab");
     }
 
     private void finishCooldownTime()

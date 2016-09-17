@@ -53,12 +53,12 @@ public class Robot : MonoBehaviour
 					m_components.Add(move);
 					break;
 				case ActionType.RotateRobot:
-					m_robotActions.Add(() => rotateRobot.TurnCommand(_onEndExecuteAction));
+					//m_robotActions.Add(() => rotateRobot.TurnCommand(_onEndExecuteAction));
 					m_storedParams.Add(item.Parameters);
 					m_components.Add(rotateRobot);
 					break;
 				case ActionType.RotateCannon:
-					m_robotActions.Add(() => rotateCannon.TurnCommand(_onEndExecuteAction));
+					//m_robotActions.Add(() => rotateCannon.TurnCommand(_onEndExecuteAction));
 					m_storedParams.Add(item.Parameters);
 					m_components.Add(rotateCannon);
                     break;

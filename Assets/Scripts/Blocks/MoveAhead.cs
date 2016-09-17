@@ -51,7 +51,7 @@ public class MoveAhead : AbstractBlock
 
     public override void Initialize()
     {
-        
+
     }
 
     public override void Run(Action callback)
@@ -67,7 +67,11 @@ public class MoveAhead : AbstractBlock
     /// </summary>
     private void resetVelocity()
     {
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        if (m_rigidbody == null)
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        else
+            m_rigidbody.velocity = Vector3.zero;
+
         m_time = 0;
         m_move = false;
     }
