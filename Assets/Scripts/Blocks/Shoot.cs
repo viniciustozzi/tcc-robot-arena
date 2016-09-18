@@ -42,5 +42,4 @@ public class Shoot : AbstractBlock
         if (m_callback != null)
             m_callback.Invoke();
     }
-
 }

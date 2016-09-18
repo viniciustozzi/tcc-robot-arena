@@ -58,4 +58,9 @@ public class EditModeController : MonoBehaviour
     {
         m_toUseBlocks.ResetBlockList(category);
     }
+
+    public void DeclareVariable()
+    {
+        
+    }
 }
