@@ -16,7 +16,7 @@ public class RobotRotate : AbstractBlock
 
     public override void Initialize()
     {
-        m_rotationSpeed = 45f;
+        m_rotationSpeed = 15f;
         m_transformToChange = transform;
     }
 

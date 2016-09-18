@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 public class CannonRotate : AbstractBlock
-{   
+{
     public float Degrees { get; set; }
 
     public override List<AbstractBlock> LogicBlocks { get; set; }
@@ -16,7 +16,7 @@ public class CannonRotate : AbstractBlock
     public override void Initialize()
     {
         m_rotationSpeed = 30;
-        m_transformToChange = transform.FindChild("CannonPivot");
+        m_transformToChange = transform.FindChild("RobotModel").FindChild("RobotChassis").FindChild("CannonPivot");
     }
 
     public override void Run(Action blockCallback)
