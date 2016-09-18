@@ -8,6 +8,7 @@ public class EditModeController : MonoBehaviour
     public GameObject editCanvas;
     public GameObject robotPrefab;
     public Transform initialTransform;
+    public CreateVarModalBehaviour createVarModal;
 
     private RobotAnalyser m_robotAnalyser;
 
@@ -61,6 +62,8 @@ public class EditModeController : MonoBehaviour
 
     public void DeclareVariable()
     {
-        
+        var modal = Instantiate(createVarModal);
+        modal.transform.SetParent(editCanvas.transform);
+        modal.transform.Reset();
     }
 }

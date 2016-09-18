@@ -19,6 +19,13 @@ public class TabsController : MonoBehaviour
             return;
         }
 
+        //É o grupo de variáveis?
+        if (group == 1)
+        {
+            //Deve colocar no scroll as variáveis que já foram declaradas
+            
+        }
+
         BlockCategory category = (BlockCategory)group;
 
         m_editMode.ResetBlocksToUse(category);
