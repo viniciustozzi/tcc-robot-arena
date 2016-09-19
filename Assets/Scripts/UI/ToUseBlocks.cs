@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class ToUseBlocks : MonoBehaviour
 {
     public Transform scrollContent;
+    public GameObject variablePrefab;
 
     public List<GameObject> RobotActionsBlocks;
     public List<GameObject> VariablesBlocks;
@@ -23,7 +24,9 @@ public class ToUseBlocks : MonoBehaviour
             case BlockCategory.RobotActions:
                 addToScroll(RobotActionsBlocks); break;
             case BlockCategory.Variables:
-                addToScroll(VariablesBlocks); break;
+                addToScroll(VariablesBlocks);
+                addExistingVariables();
+                break;
             case BlockCategory.Events:
                 addToScroll(EventsBlocks); break;
             case BlockCategory.Operators:
@@ -40,6 +43,18 @@ public class ToUseBlocks : MonoBehaviour
             var blockObj = Instantiate(item) as GameObject;
             blockObj.transform.SetParent(scrollContent);
             blockObj.transform.ResetScale();
+        }
+    }
+
+    private void addExistingVariables()
+    {
+        //Deve colocar no scroll as variáveis que já foram declaradas
+        foreach (var item in VariableController.Variables)
+        {
+            var varBlock = Instantiate(variablePrefab);
+            varBlock.GetComponent<UI_Variable>().SetVarName(item.Key);
+            varBlock.transform.SetParent(scrollContent);
+            varBlock.transform.Reset();
         }
     }
 

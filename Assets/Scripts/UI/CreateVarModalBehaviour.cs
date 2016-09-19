@@ -8,6 +8,13 @@ public class CreateVarModalBehaviour : MonoBehaviour
     public InputField input_valueVar;
     public Dropdown drop_typeVar;
 
+    private EditModeController m_editMode;
+
+    void Start()
+    {
+        m_editMode = FindObjectOfType<EditModeController>();
+    }
+
     public void ConfirmCreateClick()
     {
         string name = input_nameVar.text;
@@ -15,6 +22,7 @@ public class CreateVarModalBehaviour : MonoBehaviour
         var type = getVarType(drop_typeVar.value);
 
         VariableController.DeclareVariable(name, type, value);
+        m_editMode.ResetBlocksToUse(BlockCategory.Variables);
         CloseModal();
     }
 
