@@ -10,8 +10,6 @@ public class UI_MoveAhead : UIBlock
 
     protected override AbstractBlock SetupBlockInfo()
     {
-        //GameObject go = new GameObject();
-        Controller.Instance.CURRENT_ROBOT.name = "MoveAhead";
         var move = Controller.Instance.CURRENT_ROBOT.AddComponent<MoveAhead>();
         move.Distance = Distance;
 
