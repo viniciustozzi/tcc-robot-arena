@@ -23,11 +23,6 @@ public class EditModeController : MonoBehaviour
     {
         m_robotAnalyser = FindObjectOfType<RobotAnalyser>();
 
-        VariableController.ClearAllVariables();
-        VariableController.DeclareVariable("VarA", VariableType.Number, 1);
-        VariableController.DeclareVariable("VarB", VariableType.Bool, true);
-        VariableController.DeclareVariable("VarC", VariableType.String, "var string");
-
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();
         m_usedBlocks = FindObjectOfType<UsedBlocks>();
         m_tabsController = FindObjectOfType<TabsController>();
@@ -60,7 +55,7 @@ public class EditModeController : MonoBehaviour
         m_toUseBlocks.ResetBlockList(category);
     }
 
-    public void DeclareVariable()
+    public void OpenDeclareVariableModal()
     {
         var modal = Instantiate(createVarModal);
         modal.transform.SetParent(editCanvas.transform);

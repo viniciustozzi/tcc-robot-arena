@@ -11,7 +11,6 @@ public class Btn_CreateVar : MonoBehaviour
     {
         m_editMode = FindObjectOfType<EditModeController>();
         m_button = GetComponent<Button>();
+        m_button.onClick.AddListener(() => m_editMode.OpenDeclareVariableModal());
     }
-
-
 }
