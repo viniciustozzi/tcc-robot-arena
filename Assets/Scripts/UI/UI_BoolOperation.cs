@@ -13,6 +13,7 @@ public class UI_BoolOperation : UIBlock
     protected override void Awake()
     {
         m_horizontalGroup = GetComponent<HorizontalLayoutGroup>();
+        m_logicalOperations = new List<UI_LogicalOperation>();
 
         base.Awake();
     }
