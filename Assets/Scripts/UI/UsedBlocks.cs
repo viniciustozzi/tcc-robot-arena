@@ -20,7 +20,7 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
         blockComp.DropValid = true;
 
         blockComp.FromWhere = ComeFromWhere.UsedBlocks;
-        
+
         //O bloco veio de dentro de outro bloco?
         if (blockComp.FromWhere == ComeFromWhere.InsideBlock)
         {
@@ -33,8 +33,17 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
         m_editMode.ResetBlocksToUse(blockComp.category);
     }
 
-    public void OnExcludeButton()
+    public void OnExcludeButton(UIBlock block)
     {
+        var lastParent = block.LastParent;
 
+        //Caso esse bloco esteja atrelado a algum bloco pai (dentro de outro bloco)
+        if (lastParent != null)
+        {
+            //Deve remover esse bloco da lista do pai
+            block.LastParent.RemoveFromList(block);
+        }   
+
+        Destroy(block.gameObject);
     }
 }

@@ -18,6 +18,6 @@ public class ExcludeButtonBehaviour : MonoBehaviour, IDropHandler
 
         if (blockComp == null) return;
 
-        m_usedBlocks.OnExcludeButton();
+        m_usedBlocks.OnExcludeButton(blockComp);
     }
 }
