@@ -88,7 +88,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         var block = eventData.pointerDrag.GetComponent<UIBlock>();
 
-        if (block != null)
+        //Caso o bloco exista e não seja um operador relacional ou lógico (já que operadores são só parâmetros de If ou While)
+        if (block != null && block.category != BlockCategory.Operators)
         {
             //O bloco veio de dentro de outro bloco?
             if (block.FromWhere == ComeFromWhere.InsideBlock)

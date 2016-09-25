@@ -4,7 +4,7 @@ using System;
 
 public class If : AbstractBlock
 {
-    public RelationalOperation condicao;
+    public BoolOperation condition;
 
     private Action m_callback;
 
@@ -35,7 +35,7 @@ public class If : AbstractBlock
             return;
         }
 
-        if (condicao.IsTrue())
+        if (condition.IsTrue())
             executeBlock();
         else
         {

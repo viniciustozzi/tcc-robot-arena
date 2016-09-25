@@ -26,6 +26,9 @@ public class EditModeController : MonoBehaviour
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();
         m_usedBlocks = FindObjectOfType<UsedBlocks>();
         m_tabsController = FindObjectOfType<TabsController>();
+
+        VariableController.DeclareVariable("x", VariableType.Number, 1);
+        VariableController.DeclareVariable("y", VariableType.Number, 3);
     }
 
     public void SaveRobot()
@@ -34,6 +37,12 @@ public class EditModeController : MonoBehaviour
 
         //É necessário pegar a raiz (onde começa) o algoritmo do robo
         var root = FindObjectOfType<OnBegin>();
+
+        if (root == null)
+        {
+            Debug.LogWarning("Não há nenhum bloco OnBegin!");
+            return;
+        }
 
         Debug.Log("EditModeController: " + root.gameObject.name + " : " + root.UI_Blocks.Count);
 

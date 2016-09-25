@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class UI_BoolOperation : UIBlock
 {
+    public UI_IfBlock conditionalBlock;
+
     private HorizontalLayoutGroup m_horizontalGroup;
     private List<UI_LogicalOperation> m_logicalOperations;
     private UI_RelationalOperation m_relationalOp;
-
+    
     protected override void Awake()
     {
         m_horizontalGroup = GetComponent<HorizontalLayoutGroup>();

@@ -6,21 +6,13 @@ using UnityEngine.EventSystems;
 
 public class UI_IfBlock : UIBlock
 {
-    public List<UI_BoolOperation> BooleanExpressions;
-
-    protected override void Awake()
-    {
-        CanHaveBlocks = true;
-
-        base.Awake();
-    }
-
+    public UI_BoolOperation booleanExpression;
+    
     protected override AbstractBlock SetupBlockInfo()
     {
-        //GameObject go = new GameObject();
-        //go.name = "If";
-        //var ifComp = go.AddComponent<If>();
-
-        throw new NotImplementedException();
+        Controller.Instance.CURRENT_ROBOT.name = "If";
+        var ifComp = Controller.Instance.CURRENT_ROBOT.AddComponent<If>();
+        ifComp.condition = booleanExpression.GetBoolOperation();
+        return ifComp;
     }
 }
