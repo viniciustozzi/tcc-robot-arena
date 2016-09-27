@@ -5,7 +5,7 @@ using System;
 
 public class While : AbstractBlock
 {
-    public RelationalOperation expression;
+    public BoolOperation expression;
     private Action m_callback;
 
     private int m_index;

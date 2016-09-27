@@ -10,9 +10,9 @@ public class UI_IfBlock : UIBlock
     
     protected override AbstractBlock SetupBlockInfo()
     {
-        Controller.Instance.CURRENT_ROBOT.name = "If";
-        var ifComp = Controller.Instance.CURRENT_ROBOT.AddComponent<If>();
-        ifComp.condition = booleanExpression.GetBoolOperation();
-        return ifComp;
+        Controller.Instance.CURRENT_ROBOT.name = "While";
+        var whileComp = Controller.Instance.CURRENT_ROBOT.AddComponent<While>();
+        whileComp.expression = booleanExpression.GetBoolOperation();
+        return whileComp;
     }
 }
