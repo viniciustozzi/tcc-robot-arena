@@ -53,10 +53,6 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         m_startPos = transform.position;
         m_canvasGroup.blocksRaycasts = false;
         DropValid = false;
-
-        //Se no início do drag, esse bloco estiver dentro de outro bloco, 
-        if (FromWhere == ComeFromWhere.InsideBlock)
-            LastParent = transform.GetComponent<UIBlock>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -91,17 +87,18 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         //Caso o bloco exista e não seja um operador relacional ou lógico (já que operadores são só parâmetros de If ou While)
         if (block != null && block.category != BlockCategory.Operators)
         {
-            //O bloco veio de dentro de outro bloco?
-            if (block.FromWhere == ComeFromWhere.InsideBlock)
-            {
-                //Remove o bloco de dentro do bloco de onde ele veio (exemplo: MoveAhead dentro de um While)
-                block.LastParent.RemoveFromList(block);
-            }
-
             //Esse bloco pode ter blocos dentro dele? (Se sim significa que é um If, While etc...
             if (CanHaveBlocks)
             {
+                //O bloco veio de dentro de outro bloco?
+                if (block.FromWhere == ComeFromWhere.InsideBlock)
+                {
+                    //Remove o bloco de dentro do bloco de onde ele veio (exemplo: MoveAhead dentro de um While)
+                    block.LastParent.RemoveFromList(block);
+                }
+
                 block.FromWhere = ComeFromWhere.InsideBlock;
+                block.LastParent = this;
                 AddToList(block);
             }
         }

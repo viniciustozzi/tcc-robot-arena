@@ -18,9 +18,7 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
         if (blockComp == null) return;
 
         blockComp.DropValid = true;
-
-        blockComp.FromWhere = ComeFromWhere.UsedBlocks;
-
+        
         //O bloco veio de dentro de outro bloco?
         if (blockComp.FromWhere == ComeFromWhere.InsideBlock)
         {
@@ -28,6 +26,8 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
             blockComp.LastParent.RemoveFromList(blockComp);
         }
 
+        blockComp.FromWhere = ComeFromWhere.UsedBlocks;
+        
         blockComp.transform.SetParent(transform);
 
         m_editMode.ResetBlocksToUse(blockComp.category);
