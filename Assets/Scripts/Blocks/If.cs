@@ -39,7 +39,7 @@ public class If : AbstractBlock
             executeBlock();
         else
         {
-            m_callback.Invoke();
+            Invoke("InvokeCallback", 0.1f);
         }       
     }
     
@@ -47,7 +47,6 @@ public class If : AbstractBlock
     {
         m_callback.Invoke();
     }
-
 
     private void executeBlock()
 	{
