@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_BoolOperation : UIBlock
+public class UI_BoolOperation : MonoBehaviour, IDropHandler
 {
     public UI_IfBlock conditionalBlock;
 
@@ -12,15 +12,13 @@ public class UI_BoolOperation : UIBlock
     private List<UI_LogicalOperation> m_logicalOperations;
     private UI_RelationalOperation m_relationalOp;
     
-    protected override void Awake()
+    protected void Awake()
     {
         m_horizontalGroup = GetComponent<HorizontalLayoutGroup>();
         m_logicalOperations = new List<UI_LogicalOperation>();
-
-        base.Awake();
     }
 
-    public override void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         UI_LogicalOperation logicalBlock = eventData.pointerDrag.GetComponent<UI_LogicalOperation>();
 
