@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class UsedBlocks : MonoBehaviour, IDropHandler
 {
+    public Transform contentScroll;
     private EditModeController m_editMode;
 
     void Awake()
@@ -28,7 +29,7 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
 
         blockComp.FromWhere = ComeFromWhere.UsedBlocks;
         
-        blockComp.transform.SetParent(transform);
+        blockComp.transform.SetParent(contentScroll.transform);
 
         m_editMode.ResetBlocksToUse(blockComp.category);
     }
