@@ -12,6 +12,8 @@ public class OnBegin : UIBlock
 
         Destroy(go);
 
+        //Como pegar os blocos daqui?
+
         return cycle;
     }
 }
