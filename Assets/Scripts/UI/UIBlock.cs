@@ -115,7 +115,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         UI_Blocks.Add(block);
         addToVerticalLayout(block.transform);
-        block.transform.Reset();
+        block.transform.ResetPosition();
     }
 
     public void RemoveFromList(UIBlock block)

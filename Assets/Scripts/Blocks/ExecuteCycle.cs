@@ -5,6 +5,12 @@ using System;
 public class ExecuteCycle : AbstractBlock
 {
     public override List<AbstractBlock> LogicBlocks { get; set; }
+
+    //Lista de ações que o robô executará ao colidir com uma barreira
+    public List<AbstractBlock> WallCollisionBlocks { get; set; }
+
+    //Lista de ações que o robô executará ao detectar outro robô
+    public List<AbstractBlock> OnDetectBlocks { get; set; }
     
     private Action m_callback;
     private int m_index;
