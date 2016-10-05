@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class OnWallCollision : UIBlock
+public class UI_OnBegin : UIBlock
 {
     protected override AbstractBlock SetupBlockInfo()
     {
         GameObject go = new GameObject();
         go.name = "ExecuteCycle";
-        ExecuteCycle cycle = go.GetComponent<ExecuteCycle>();
-
-        if (cycle == null)
-        {
-            cycle = go.AddComponent<ExecuteCycle>();
-        }
+        ExecuteCycle cycle = go.AddComponent<ExecuteCycle>();
 
         Destroy(go);
-        
+
+        //Como pegar os blocos daqui?
+
         return cycle;
     }
 }

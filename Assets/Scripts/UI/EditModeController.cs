@@ -36,7 +36,9 @@ public class EditModeController : MonoBehaviour
         Controller.Instance.CURRENT_ROBOT = (GameObject)Instantiate(robotPrefab, initialTransform.position, Quaternion.identity);
 
         //É necessário pegar a raiz (onde começa) o algoritmo do robo
-        var root = FindObjectOfType<OnBegin>();
+        var root = FindObjectOfType<UI_OnBegin>();
+
+        var onWallRoot = FindObjectOfType<UI_OnWallCollision>();
 
         if (root == null)
         {
@@ -48,6 +50,11 @@ public class EditModeController : MonoBehaviour
 
         //GetLogicalBlockStructure returns a ExecuteCycle because is the root
         ExecuteCycle robotCycle = (ExecuteCycle)root.GetLogicBlockStructure();
+
+        if (onWallRoot != null)
+        {
+            OnWallCollisionCycle wallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
+        }
 
         if (robotCycle.LogicBlocks.Count <= 0)
         {

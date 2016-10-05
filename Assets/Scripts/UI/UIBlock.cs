@@ -147,8 +147,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private AbstractBlock getBlockInfo()
     {
-        if (this is OnBegin)
-            return ((OnBegin)this).SetupBlockInfo();
+        if (this is UI_OnBegin)
+            return ((UI_OnBegin)this).SetupBlockInfo();
         else if (this is UI_MoveAhead)
             return ((UI_MoveAhead)this).SetupBlockInfo();
         else if (this is UI_MoveBack)

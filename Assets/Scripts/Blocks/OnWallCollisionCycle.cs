@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 using System;
+using System.Collections.Generic;
 
-public class ExecuteCycle : AbstractBlock
+public class OnWallCollisionCycle : AbstractBlock
 {
     public override List<AbstractBlock> LogicBlocks { get; set; }
 
-    private Action m_mainCallback;
+    private Action m_callback;
 
-    private int m_mainIndex;
+    private int m_index;
 
     void Awake()
     {
@@ -22,11 +23,11 @@ public class ExecuteCycle : AbstractBlock
 
     public override void Run(Action blockCallback)
     {
-        m_mainCallback = blockCallback;
+        m_callback = blockCallback;
 
         if (LogicBlocks.Count <= 0)
         {
-            m_mainCallback.Invoke();
+            m_callback.Invoke();
             return;
         }
 
@@ -35,15 +36,15 @@ public class ExecuteCycle : AbstractBlock
 
     private void executeMainBlock()
     {
-        LogicBlocks[m_mainIndex].Run(_onExecuteMainBlock);
+        LogicBlocks[m_index].Run(_onExecuteMainBlock);
     }
 
     private void _onExecuteMainBlock()
     {
-        m_mainIndex++;
+        m_index++;
 
-        if (m_mainIndex >= LogicBlocks.Count)
-            m_mainIndex = 0;
+        if (m_index >= LogicBlocks.Count)
+            m_index = 0;
 
         executeMainBlock();
     }
