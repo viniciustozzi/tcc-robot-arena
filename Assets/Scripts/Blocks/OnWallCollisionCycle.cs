@@ -31,21 +31,34 @@ public class OnWallCollisionCycle : AbstractBlock
             return;
         }
 
-        executeMainBlock();
+        executeBlock();
     }
 
-    private void executeMainBlock()
+    private void executeBlock()
     {
-        LogicBlocks[m_index].Run(_onExecuteMainBlock);
+        LogicBlocks[m_index].Run(_onExecuteBlock);
     }
 
-    private void _onExecuteMainBlock()
+    private void _onExecuteBlock()
     {
         m_index++;
 
         if (m_index >= LogicBlocks.Count)
             m_index = 0;
 
-        executeMainBlock();
+        executeBlock();
+    }
+
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.transform.tag == "Wall")
+        {
+            //TODO: Parar a execução de outros eventos
+
+            Run(()=>
+            {
+                //Fim da execução de todos os blocos de colisão
+            });
+        }
     }
 }

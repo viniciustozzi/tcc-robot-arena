@@ -51,9 +51,11 @@ public class EditModeController : MonoBehaviour
         //GetLogicalBlockStructure returns a ExecuteCycle because is the root
         ExecuteCycle robotCycle = (ExecuteCycle)root.GetLogicBlockStructure();
 
+        OnWallCollisionCycle wallCycle = null;
+
         if (onWallRoot != null)
         {
-            OnWallCollisionCycle wallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
+            wallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
         }
 
         if (robotCycle.LogicBlocks.Count <= 0)
@@ -63,7 +65,7 @@ public class EditModeController : MonoBehaviour
         }
 
         editCanvas.SetActive(false);
-        m_robotAnalyser.TestRobot(robotCycle);
+        m_robotAnalyser.TestRobot(robotCycle, wallCycle);
     }
 
     public void ResetBlocksToUse(BlockCategory category)
