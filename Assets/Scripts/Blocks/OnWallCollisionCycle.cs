@@ -53,12 +53,17 @@ public class OnWallCollisionCycle : AbstractBlock
     {
         if (hit.transform.tag == "Wall")
         {
-            //TODO: Parar a execução de outros eventos
+            SendMessage("StopExecution", SendMessageOptions.DontRequireReceiver);
 
-            Run(()=>
-            {
-                //Fim da execução de todos os blocos de colisão
-            });
+            Run(_onRunAllBlocks);
         }
+    }
+
+    /// <summary>
+    /// Fim da execução de todos os blocos de colisão
+    /// </summary>
+    private void _onRunAllBlocks()
+    {
+        
     }
 }

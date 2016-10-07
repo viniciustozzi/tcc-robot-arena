@@ -10,4 +10,6 @@ public abstract class AbstractBlock : MonoBehaviour
 	public abstract void Run(Action blockCallback);
 
     public abstract List<AbstractBlock> LogicBlocks { get; set; }
+
+    public abstract void Stop();
 }

@@ -5,9 +5,7 @@ using System;
 public class ExecuteCycle : AbstractBlock
 {
     public override List<AbstractBlock> LogicBlocks { get; set; }
-
-    private Action m_mainCallback;
-
+    
     private int m_mainIndex;
 
     void Awake()
@@ -22,11 +20,9 @@ public class ExecuteCycle : AbstractBlock
 
     public override void Run(Action blockCallback)
     {
-        m_mainCallback = blockCallback;
-
         if (LogicBlocks.Count <= 0)
         {
-            m_mainCallback.Invoke();
+            blockCallback.Invoke();
             return;
         }
 
@@ -46,5 +42,10 @@ public class ExecuteCycle : AbstractBlock
             m_mainIndex = 0;
 
         executeMainBlock();
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
     }
 }
