@@ -18,11 +18,11 @@ public class ExecuteCycle : AbstractBlock
         LogicBlocks.ForEach(x => x.Initialize());
     }
 
-    public override void Run(Action blockCallback)
+    public override void Run(Action<bool> blockCallback)
     {
         if (LogicBlocks.Count <= 0)
         {
-            blockCallback.Invoke();
+            blockCallback.Invoke(false);
             return;
         }
 
@@ -34,7 +34,7 @@ public class ExecuteCycle : AbstractBlock
         LogicBlocks[m_mainIndex].Run(_onExecuteMainBlock);
     }
 
-    private void _onExecuteMainBlock()
+    private void _onExecuteMainBlock(bool stopCycle)
     {
         m_mainIndex++;
 

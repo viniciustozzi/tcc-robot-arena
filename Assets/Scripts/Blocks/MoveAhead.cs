@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class MoveAhead : AbstractBlock
 {
-    private Action m_onFinishMove;
+    private Action<bool> m_onFinishMove;
     private Rigidbody m_rigidbody;
     private float m_time;
     private bool m_move;
@@ -42,9 +42,9 @@ public class MoveAhead : AbstractBlock
                 //Reseta a velocidade do robo para 0
                 resetVelocity();
 
-                //Já acbaou o movimento, chama o callback
+                //Já acbaou o movimento, chama o callback sem interromper o ciclo atual
                 if (m_onFinishMove != null)
-                    m_onFinishMove.Invoke();
+                    m_onFinishMove.Invoke(false);
             }
         }
     }
@@ -54,7 +54,7 @@ public class MoveAhead : AbstractBlock
 
     }
 
-    public override void Run(Action callback)
+    public override void Run(Action<bool> callback)
     {
         m_onFinishMove = callback;
 
@@ -74,5 +74,10 @@ public class MoveAhead : AbstractBlock
 
         m_time = 0;
         m_move = false;
+    }
+
+    public override void Stop()
+    {
+        m_onFinishMove.Invoke(true);
     }
 }

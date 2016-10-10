@@ -7,7 +7,7 @@ public abstract class AbstractBlock : MonoBehaviour
 {
 	public abstract void Initialize();
 	
-	public abstract void Run(Action blockCallback);
+	public abstract void Run(Action<bool> blockCallback);
 
     public abstract List<AbstractBlock> LogicBlocks { get; set; }
 
