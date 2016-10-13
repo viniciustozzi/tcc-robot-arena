@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class MoveBack : AbstractBlock {
 
-    private Action m_onFinishMove;
+    private Action<bool> m_onFinishMove;
     private Rigidbody m_rigidbody;
     private float m_time;
     private bool m_move;
@@ -37,7 +37,7 @@ public class MoveBack : AbstractBlock {
 
                 //Já acbaou o movimento, chama o callback
                 if (m_onFinishMove != null)
-                    m_onFinishMove.Invoke();
+                    m_onFinishMove.Invoke(false);
             }
         }
     }
@@ -47,7 +47,7 @@ public class MoveBack : AbstractBlock {
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-    public override void Run(Action callback)
+    public override void Run(Action<bool> callback)
     {
         m_onFinishMove = callback;
 
@@ -63,5 +63,10 @@ public class MoveBack : AbstractBlock {
         m_rigidbody.velocity = Vector3.zero;
         m_time = 0;
         m_move = false;
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
     }
 }

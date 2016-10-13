@@ -5,7 +5,7 @@ using System;
 public class ExecuteCycle : AbstractBlock
 {
     public override List<AbstractBlock> LogicBlocks { get; set; }
-    
+
     private int m_mainIndex;
 
     void Awake()
@@ -34,8 +34,14 @@ public class ExecuteCycle : AbstractBlock
         LogicBlocks[m_mainIndex].Run(_onExecuteMainBlock);
     }
 
+    //Se stop cycle foi recebido como true significa que foi interrompido e deve parara execução desse ciclo
     private void _onExecuteMainBlock(bool stopCycle)
     {
+        if (stopCycle)
+        {
+            return;
+        }
+
         m_mainIndex++;
 
         if (m_mainIndex >= LogicBlocks.Count)
@@ -46,6 +52,6 @@ public class ExecuteCycle : AbstractBlock
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+
     }
 }

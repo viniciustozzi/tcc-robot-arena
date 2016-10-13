@@ -7,7 +7,7 @@ public class OnWallCollisionCycle : AbstractBlock
 {
     public override List<AbstractBlock> LogicBlocks { get; set; }
 
-    private Action m_callback;
+    private Action<bool> m_callback;
 
     private int m_index;
 
@@ -21,13 +21,13 @@ public class OnWallCollisionCycle : AbstractBlock
         LogicBlocks.ForEach(x => x.Initialize());
     }
 
-    public override void Run(Action blockCallback)
+    public override void Run(Action<bool> blockCallback)
     {
         m_callback = blockCallback;
 
         if (LogicBlocks.Count <= 0)
         {
-            m_callback.Invoke();
+            m_callback.Invoke(false);
             return;
         }
 
@@ -39,7 +39,7 @@ public class OnWallCollisionCycle : AbstractBlock
         LogicBlocks[m_index].Run(_onExecuteBlock);
     }
 
-    private void _onExecuteBlock()
+    private void _onExecuteBlock(bool interrupt)
     {
         m_index++;
 
@@ -62,8 +62,13 @@ public class OnWallCollisionCycle : AbstractBlock
     /// <summary>
     /// Fim da execução de todos os blocos de colisão
     /// </summary>
-    private void _onRunAllBlocks()
+    private void _onRunAllBlocks(bool interrupt)
     {
         
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
     }
 }

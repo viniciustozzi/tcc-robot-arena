@@ -9,7 +9,7 @@ public class Shoot : AbstractBlock
     private float m_cooldownTime;
     private float m_speed;
     private GameObject m_shotPrefab;
-    private Action m_callback;
+    private Action<bool> m_callback;
 
     public override List<AbstractBlock> LogicBlocks { get; set; }
 
@@ -23,7 +23,7 @@ public class Shoot : AbstractBlock
         shotTransform = transform.FindChild("posShot");
     }
 
-    public override void Run(Action blockCallback)
+    public override void Run(Action<bool> blockCallback)
     {
         m_callback = blockCallback;
 
@@ -40,6 +40,11 @@ public class Shoot : AbstractBlock
     private void finishCooldownTime()
     {
         if (m_callback != null)
-            m_callback.Invoke();
+            m_callback.Invoke(false);
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
     }
 }

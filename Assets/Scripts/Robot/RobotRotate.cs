@@ -20,19 +20,18 @@ public class RobotRotate : AbstractBlock
         m_transformToChange = transform;
     }
 
-    public override void Run(Action blockCallback)
+    public override void Run(Action<bool> blockCallback)
     {
         turnCommand(blockCallback);
     }
 
-    IEnumerator RotateObject(Transform objToRotate, float yRotation, float speed, Action onRotateCompleted)
+    IEnumerator RotateObject(Transform objToRotate, float yRotation, float speed, Action<bool> onRotateCompleted)
     {
         float inc = (yRotation / speed) * Time.deltaTime;
         float finalRotation = objToRotate.eulerAngles.y + yRotation;
 
         do
         {
-
             objToRotate.rotation = Quaternion.Slerp(objToRotate.rotation, Quaternion.Euler(objToRotate.eulerAngles.x, finalRotation, objToRotate.eulerAngles.z), inc);  //Quaternion.Euler(0, objToRotate.eulerAngles.y + inc , 0);
 
             yield return null;
@@ -40,7 +39,7 @@ public class RobotRotate : AbstractBlock
             if (Math.Round(objToRotate.eulerAngles.y, 1) == Math.Round(finalRotation, 1))
             {
                 if (onRotateCompleted != null)
-                    onRotateCompleted.Invoke();
+                    onRotateCompleted.Invoke(false);
 
                 break;
             }
@@ -51,7 +50,7 @@ public class RobotRotate : AbstractBlock
     /// <summary>
     /// Rotate the robot an amount of degrees
     /// </summary>
-	private void turnCommand(Action callback = null)
+	private void turnCommand(Action<bool> callback = null)
     {
         StartCoroutine(RotateObject(m_transformToChange, Degrees, m_rotationSpeed, callback));
     }
@@ -60,5 +59,10 @@ public class RobotRotate : AbstractBlock
     {
         float radians = degrees * (Mathf.PI / 180f);
         return new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0);
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
     }
 }

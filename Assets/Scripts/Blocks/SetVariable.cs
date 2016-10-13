@@ -17,7 +17,7 @@ public class SetVariable : AbstractBlock
 
     }
 
-    public override void Run(Action blockCallback)
+    public override void Run(Action<bool> blockCallback)
     {
 
         VariableInfo varInfo = VariableController.Variables[VarName];
@@ -47,5 +47,10 @@ public class SetVariable : AbstractBlock
 
                 break;
         }
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
     }
 }

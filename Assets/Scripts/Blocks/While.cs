@@ -6,7 +6,7 @@ using System;
 public class While : AbstractBlock
 {
     public BoolOperation expression;
-    private Action m_callback;
+    private Action<bool> m_callback;
 
     private int m_index;
 
@@ -19,13 +19,13 @@ public class While : AbstractBlock
         LogicBlocks.ForEach(x => x.Initialize());
     }
 
-    public override void Run(Action blockCallback)
+    public override void Run(Action<bool> blockCallback)
     {
         m_callback = blockCallback;
 
         if (LogicBlocks.Count <= 0)
         {
-            m_callback.Invoke();
+            m_callback.Invoke(true);
             return;
         }
 
@@ -33,9 +33,14 @@ public class While : AbstractBlock
             executeBlock();
     }
 
+    public override void Stop()
+    {
+        throw new NotImplementedException();
+    }
+
     private void executeBlock()
     {
-        LogicBlocks[m_index].Run(()=>
+        LogicBlocks[m_index].Run((bool mudarDepois)=>
             {
                 m_index++;
 
@@ -61,6 +66,6 @@ public class While : AbstractBlock
 
     private void InvokeCallback()
     {
-        m_callback.Invoke();
+        m_callback.Invoke(true);
     }
 }
