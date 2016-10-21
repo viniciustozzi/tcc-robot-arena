@@ -37,7 +37,11 @@ public class MoveBack : AbstractBlock {
 
                 //Já acbaou o movimento, chama o callback
                 if (m_onFinishMove != null)
+                {
+                    IsRunning = false;
                     m_onFinishMove.Invoke(false);
+                }
+                    
             }
         }
     }
