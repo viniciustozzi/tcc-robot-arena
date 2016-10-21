@@ -44,7 +44,9 @@ public class OnWallCollisionCycle : AbstractBlock
         m_index++;
 
         if (m_index >= LogicBlocks.Count)
-            m_index = 0;
+        {
+            m_callback.Invoke(false);
+        }
 
         executeBlock();
     }
@@ -53,7 +55,7 @@ public class OnWallCollisionCycle : AbstractBlock
     {
         if (hit.transform.tag == "Wall")
         {
-            SendMessage("StopExecution", SendMessageOptions.DontRequireReceiver);
+            SendMessage("Stop", SendMessageOptions.DontRequireReceiver);
 
             Run(_onRunAllBlocks);
         }
@@ -64,11 +66,11 @@ public class OnWallCollisionCycle : AbstractBlock
     /// </summary>
     private void _onRunAllBlocks(bool interrupt)
     {
-        
+        //Deve continuar a execução da lista main de bloco
     }
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        
     }
 }

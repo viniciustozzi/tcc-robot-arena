@@ -37,14 +37,16 @@ public class MoveAhead : AbstractBlock
 
             else
             {
-                Debug.Log("Andou tudo que tinha que andar");
-
                 //Reseta a velocidade do robo para 0
                 resetVelocity();
 
                 //Já acbaou o movimento, chama o callback sem interromper o ciclo atual
                 if (m_onFinishMove != null)
+                {
+                    IsRunning = false;
                     m_onFinishMove.Invoke(false);
+                }
+                   
             }
         }
     }
@@ -78,6 +80,11 @@ public class MoveAhead : AbstractBlock
 
     public override void Stop()
     {
+        if (!IsRunning) return;
+
+        resetVelocity();
         m_onFinishMove.Invoke(true);
+
+        base.Stop();
     }
 }
