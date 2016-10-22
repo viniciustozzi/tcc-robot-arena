@@ -32,6 +32,17 @@ public class UsedBlocks : MonoBehaviour, IDropHandler
         blockComp.transform.SetParent(contentScroll.transform);
 
         m_editMode.ResetBlocksToUse(blockComp.category);
+
+        setTagToInitialBlocks(blockComp);    
+    }
+
+    //Coloca tag nos blocos de início, caso seja necessário na hora de encontrar os primeiros blocos
+    private void setTagToInitialBlocks(UIBlock blockComp)
+    {
+        if (blockComp is UI_OnBegin)
+            blockComp.gameObject.tag = "OnBegin";
+        else if (blockComp is UI_OnWallCollision)
+            blockComp.gameObject.tag = "OnWallCollision";
     }
 
     public void OnExcludeButton(UIBlock block)

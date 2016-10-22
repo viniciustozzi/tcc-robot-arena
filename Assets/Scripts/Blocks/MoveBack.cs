@@ -53,6 +53,8 @@ public class MoveBack : AbstractBlock {
 
     public override void Run(Action<bool> callback)
     {
+        base.Run(callback);
+
         m_onFinishMove = callback;
 
         resetVelocity();
@@ -71,6 +73,11 @@ public class MoveBack : AbstractBlock {
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        if (!IsRunning) return;
+
+        resetVelocity();
+        m_onFinishMove.Invoke(true);
+
+        base.Stop();
     }
 }

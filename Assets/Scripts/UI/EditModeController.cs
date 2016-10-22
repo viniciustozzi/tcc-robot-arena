@@ -31,38 +31,45 @@ public class EditModeController : MonoBehaviour
         VariableController.DeclareVariable("y", VariableType.Number, 3);
     }
 
+    private UI_OnBegin getOnBeginBlock()
+    {
+        var goBegin = GameObject.FindWithTag("OnBegin");
+
+        if (goBegin != null)
+            return goBegin.GetComponent<UI_OnBegin>();
+
+        Debug.LogWarning("Não foi encontrado bloco UI_OnBegin!");
+        return null;
+    }
+
+    private UI_OnWallCollision getOnWallCollisionBlock()
+    {
+        var goWallCollision = GameObject.FindWithTag("OnWallCollision");
+
+        if (goWallCollision != null)
+            return goWallCollision.GetComponent<UI_OnWallCollision>();
+
+        Debug.LogWarning("Não foi encontrado bloco UI_OnWallCollision!");
+        return null;
+    }
+
     public void SaveRobot()
     {
         Controller.Instance.CURRENT_ROBOT = (GameObject)Instantiate(robotPrefab, initialTransform.position, Quaternion.identity);
 
-        //É necessário pegar a raiz (onde começa) o algoritmo do robo
-        var root = FindObjectOfType<UI_OnBegin>();
+        var root = getOnBeginBlock();
 
-        var onWallRoot = FindObjectOfType<UI_OnWallCollision>();
+        var onWallRoot = getOnWallCollisionBlock();
 
-        if (root == null)
-        {
-            Debug.LogWarning("Não há nenhum bloco OnBegin!");
-            return;
-        }
+        ExecuteCycle robotCycle = null;
 
-        Debug.Log("EditModeController: " + root.gameObject.name + " : " + root.UI_Blocks.Count);
-
-        //GetLogicalBlockStructure returns a ExecuteCycle because is the root
-        ExecuteCycle robotCycle = (ExecuteCycle)root.GetLogicBlockStructure();
+        if (root != null)
+            robotCycle = (ExecuteCycle)root.GetLogicBlockStructure();
 
         OnWallCollisionCycle wallCycle = null;
 
         if (onWallRoot != null)
-        {
             wallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
-        }
-
-        if (robotCycle.LogicBlocks.Count <= 0)
-        {
-            Debug.Log("DEU 0 NO ESQUEMA!");
-            return;
-        }
 
         editCanvas.SetActive(false);
         m_robotAnalyser.TestRobot(robotCycle, wallCycle);

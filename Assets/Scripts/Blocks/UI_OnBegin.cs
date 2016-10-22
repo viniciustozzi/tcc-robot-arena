@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class UI_OnBegin : UIBlock
 {
@@ -11,9 +12,7 @@ public class UI_OnBegin : UIBlock
         ExecuteCycle cycle = go.AddComponent<ExecuteCycle>();
 
         Destroy(go);
-
-        //Como pegar os blocos daqui?
-
+        
         return cycle;
     }
 }

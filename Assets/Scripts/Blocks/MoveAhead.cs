@@ -55,9 +55,11 @@ public class MoveAhead : AbstractBlock
     {
 
     }
-
+    
     public override void Run(Action<bool> callback)
     {
+        base.Run(callback);
+
         m_onFinishMove = callback;
 
         resetVelocity();

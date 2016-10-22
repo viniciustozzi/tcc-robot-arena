@@ -103,7 +103,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             }
         }
 
-        Debug.Log("OnDrop: " + this.gameObject.name + " : " + UI_Blocks.Count);
+        //Debug.Log("OnDrop: " + this.gameObject.name + " : " + UI_Blocks.Count);
     }
 
     private void addToVerticalLayout(Transform block)
@@ -147,6 +147,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         if (this is UI_OnBegin)
             return ((UI_OnBegin)this).SetupBlockInfo();
+        else if (this is UI_OnWallCollision)
+            return ((UI_OnWallCollision)this).SetupBlockInfo();
         else if (this is UI_MoveAhead)
             return ((UI_MoveAhead)this).SetupBlockInfo();
         else if (this is UI_MoveBack)
