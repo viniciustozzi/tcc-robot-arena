@@ -17,10 +17,14 @@ public class RobotAnalyser : MonoBehaviour
         myCycle = testCycle;
         myWallCycle = wallCycle;
 
-        myCycle.Initialize();
-        myWallCycle.Initialize();
+        if (myCycle != null)
+            myCycle.Initialize();
+
+        if (myWallCycle != null)
+            myWallCycle.Initialize();
 
         //Inicia a execução de todos os blocos da rotina principal (OnBegin)
-        myCycle.Run(null);
+        if (myCycle != null)
+            myCycle.Run(null);
     }
 }

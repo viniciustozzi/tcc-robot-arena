@@ -13,8 +13,6 @@ public class UI_OnWallCollision : UIBlock
         {
             cycle = go.AddComponent<OnWallCollisionCycle>();
         }
-
-        Destroy(go);
         
         return cycle;
     }

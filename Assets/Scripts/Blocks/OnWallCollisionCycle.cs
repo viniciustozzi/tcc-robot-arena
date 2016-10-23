@@ -45,10 +45,16 @@ public class OnWallCollisionCycle : AbstractBlock
 
         if (m_index >= LogicBlocks.Count)
         {
-            m_callback.Invoke(false);
+            Invoke("InvokeCallback", 0.1f);
+            return;
         }
 
         executeBlock();
+    }
+
+    private void InvokeCallback()
+    {
+        m_callback.Invoke(false);
     }
 
     void OnCollisionEnter(Collision hit)
@@ -66,6 +72,8 @@ public class OnWallCollisionCycle : AbstractBlock
     /// </summary>
     private void _onRunAllBlocks(bool interrupt)
     {
+        Debug.Log("Executou colisão com parede");
+
         //Deve continuar a execução da lista main de bloco
     }
 
