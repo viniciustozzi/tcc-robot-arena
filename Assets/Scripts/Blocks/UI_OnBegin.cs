@@ -7,12 +7,8 @@ public class UI_OnBegin : UIBlock
 {
     protected override AbstractBlock SetupBlockInfo()
     {
-        GameObject go = new GameObject();
-        go.name = "ExecuteCycle";
-        ExecuteCycle cycle = go.AddComponent<ExecuteCycle>();
-
-        Destroy(go);
-        
+        ExecuteCycle cycle = Controller.Instance.CURRENT_ROBOT.AddComponent<ExecuteCycle>();
+   
         return cycle;
     }
 }

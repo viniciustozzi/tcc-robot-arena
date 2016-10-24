@@ -5,15 +5,8 @@ public class UI_OnWallCollision : UIBlock
 {
     protected override AbstractBlock SetupBlockInfo()
     {
-        GameObject go = new GameObject();
-        go.name = "OnWallCollisionCycle";
-        OnWallCollisionCycle cycle = go.GetComponent<OnWallCollisionCycle>();
-
-        if (cycle == null)
-        {
-            cycle = go.AddComponent<OnWallCollisionCycle>();
-        }
+        OnWallCollisionCycle onWallCollisionCycle = Controller.Instance.CURRENT_ROBOT.AddComponent<OnWallCollisionCycle>();
         
-        return cycle;
+        return onWallCollisionCycle;
     }
 }
