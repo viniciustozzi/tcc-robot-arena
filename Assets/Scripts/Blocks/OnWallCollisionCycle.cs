@@ -8,12 +8,13 @@ public class OnWallCollisionCycle : AbstractBlock
     public override List<AbstractBlock> LogicBlocks { get; set; }
 
     private Action<bool> m_callback;
-
     private int m_index;
+    private RobotAnalyser m_robotAnalyser;
 
     void Awake()
     {
         LogicBlocks = new List<AbstractBlock>();
+        m_robotAnalyser = FindObjectOfType<RobotAnalyser>();
     }
 
     public override void Initialize()
@@ -72,9 +73,8 @@ public class OnWallCollisionCycle : AbstractBlock
     /// </summary>
     private void _onRunAllBlocks(bool interrupt)
     {
-        Debug.Log("Executou colisão com parede");
-
-        //Deve continuar a execução da lista main de bloco
+        m_index = 0;
+        m_robotAnalyser.RunMainCycle();
     }
 
     public override void Stop()

@@ -5,20 +5,34 @@ using System.Linq;
 
 public class RobotAnalyser : MonoBehaviour
 {
-    public void TestRobot(ExecuteCycle testCycle, OnWallCollisionCycle wallCycle)
-    {
-        Controller.Instance.CURRENT_ROBOT.name = "ROBO";
-        var rigidbody = Controller.Instance.CURRENT_ROBOT.AddComponent<Rigidbody>();
-        rigidbody.useGravity = false;
-        
-        if (testCycle != null)
-            testCycle.Initialize();
+    private ExecuteCycle m_mainCycle;
+    private OnWallCollisionCycle m_wallCycle;
 
-        if (wallCycle != null)
-            wallCycle.Initialize();
+    public void TestRobot(ExecuteCycle mainCycle, OnWallCollisionCycle wallCycle)
+    {
+        m_mainCycle = mainCycle;
+        m_wallCycle = wallCycle;
+
+        Controller.Instance.CURRENT_ROBOT.name = "ROBO";
+
+        InitializeCycles();
 
         //Inicia a execução de todos os blocos da rotina principal (OnBegin)
-        if (testCycle != null)
-            testCycle.Run(null);
+        RunMainCycle();
+    }
+
+    public void InitializeCycles()
+    {
+        if (m_mainCycle != null)
+            m_mainCycle.Initialize();
+
+        if (m_wallCycle != null)
+            m_wallCycle.Initialize();
+    }
+
+    public void RunMainCycle()
+    {
+        if (m_mainCycle != null)
+            m_mainCycle.Run(null);
     }
 }
