@@ -13,6 +13,9 @@ public class RobotRotate : AbstractBlock
 
     private Action m_onFinishTurn;
     private float m_rotationSpeed;
+    private Action<bool> m_callback;
+    private bool m_canRotate;
+
 
     public override void Initialize()
     {
@@ -22,7 +25,11 @@ public class RobotRotate : AbstractBlock
 
     public override void Run(Action<bool> blockCallback)
     {
-        turnCommand(blockCallback);
+        m_callback = blockCallback;
+
+        turnCommand();
+
+        m_canRotate = true;
     }
 
     IEnumerator RotateObject(Transform objToRotate, float yRotation, float speed, Action<bool> onRotateCompleted)
@@ -32,6 +39,9 @@ public class RobotRotate : AbstractBlock
 
         do
         {
+            if (!m_canRotate)
+                break;
+
             objToRotate.rotation = Quaternion.Slerp(objToRotate.rotation, Quaternion.Euler(objToRotate.eulerAngles.x, finalRotation, objToRotate.eulerAngles.z), inc);  //Quaternion.Euler(0, objToRotate.eulerAngles.y + inc , 0);
 
             yield return null;
@@ -50,9 +60,9 @@ public class RobotRotate : AbstractBlock
     /// <summary>
     /// Rotate the robot an amount of degrees
     /// </summary>
-	private void turnCommand(Action<bool> callback = null)
+	private void turnCommand()
     {
-        StartCoroutine(RotateObject(m_transformToChange, Degrees, m_rotationSpeed, callback));
+        StartCoroutine(RotateObject(m_transformToChange, Degrees, m_rotationSpeed, m_callback));
     }
 
     private Vector3 DegreeToVector(float degrees)
@@ -63,6 +73,11 @@ public class RobotRotate : AbstractBlock
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        if (!IsRunning) return;
+
+        m_canRotate = false;
+        m_callback.Invoke(true);
+
+        base.Stop();
     }
 }
