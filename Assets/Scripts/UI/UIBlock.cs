@@ -130,7 +130,7 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         if (CanHaveBlocks)
         {
             List<AbstractBlock> childrenBlocks = new List<AbstractBlock>();
-            
+
             foreach (var uiBlock in UI_Blocks)
             {
                 AbstractBlock childBlock = uiBlock.GetLogicBlockStructure();
@@ -149,6 +149,8 @@ public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             return ((UI_OnBegin)this).SetupBlockInfo();
         else if (this is UI_OnWallCollision)
             return ((UI_OnWallCollision)this).SetupBlockInfo();
+        else if (this is UI_OnFindRobot)
+            return ((UI_OnFindRobot)this).SetupBlockInfo();
         else if (this is UI_MoveAhead)
             return ((UI_MoveAhead)this).SetupBlockInfo();
         else if (this is UI_MoveBack)

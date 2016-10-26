@@ -53,13 +53,24 @@ public class EditModeController : MonoBehaviour
         return null;
     }
 
+    private UI_OnFindRobot getOnFindRobotBlock()
+    {
+        var goOnFindRobot = GameObject.FindWithTag("OnFindRobot");
+
+        if (goOnFindRobot != null)
+            return goOnFindRobot.GetComponent<UI_OnFindRobot>();
+
+        Debug.LogWarning("Não foi encontrado bloco UI_OnFindRobot!");
+        return null;
+    }
+
     public void SaveRobot()
     {
         Controller.Instance.CURRENT_ROBOT = (GameObject)Instantiate(robotPrefab, initialTransform.position, Quaternion.identity);
 
         var root = getOnBeginBlock();
-
         var onWallRoot = getOnWallCollisionBlock();
+        var onFindRobot = getOnFindRobotBlock();
 
         ExecuteCycle robotCycle = null;
 
@@ -70,6 +81,11 @@ public class EditModeController : MonoBehaviour
 
         if (onWallRoot != null)
             wallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
+
+        OnFindRobotCycle onFindRobotCycle = null;
+
+        if (onFindRobot != null)
+            onFindRobotCycle = (OnFindRobotCycle)onFindRobot.GetLogicBlockStructure();
 
         editCanvas.SetActive(false);
         m_robotAnalyser.TestRobot(robotCycle, wallCycle);
