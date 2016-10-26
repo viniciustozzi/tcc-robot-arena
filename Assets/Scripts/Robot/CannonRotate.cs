@@ -42,6 +42,8 @@ public class CannonRotate : AbstractBlock
             {
                 m_time = 0;
 
+                IsRunning = false;
+
                 if (m_callback != null)
                     m_callback.Invoke(false);
 

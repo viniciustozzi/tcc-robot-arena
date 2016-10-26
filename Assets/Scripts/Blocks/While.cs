@@ -35,7 +35,7 @@ public class While : AbstractBlock
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void executeBlock()

@@ -66,6 +66,6 @@ public class If : AbstractBlock
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        
     }
 }

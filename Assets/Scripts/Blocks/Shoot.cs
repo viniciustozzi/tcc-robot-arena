@@ -45,6 +45,10 @@ public class Shoot : AbstractBlock
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        if (!IsRunning) return;
+        
+        m_callback.Invoke(true);
+
+        base.Stop();
     }
 }
