@@ -7,11 +7,13 @@ public class RobotAnalyser : MonoBehaviour
 {
     private ExecuteCycle m_mainCycle;
     private OnWallCollisionCycle m_wallCycle;
+    private OnFindRobotCycle m_onFindCycle;
 
-    public void TestRobot(ExecuteCycle mainCycle, OnWallCollisionCycle wallCycle)
+    public void TestRobot(ExecuteCycle mainCycle, OnWallCollisionCycle wallCycle, OnFindRobotCycle onFindCycle)
     {
         m_mainCycle = mainCycle;
         m_wallCycle = wallCycle;
+        m_onFindCycle = onFindCycle;
 
         Controller.Instance.CURRENT_ROBOT.name = "ROBO";
 
@@ -28,6 +30,9 @@ public class RobotAnalyser : MonoBehaviour
 
         if (m_wallCycle != null)
             m_wallCycle.Initialize();
+
+        if (m_onFindCycle != null)
+            m_onFindCycle.Initialize();
     }
 
     public void RunMainCycle()

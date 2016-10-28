@@ -88,7 +88,7 @@ public class EditModeController : MonoBehaviour
             onFindRobotCycle = (OnFindRobotCycle)onFindRobot.GetLogicBlockStructure();
 
         editCanvas.SetActive(false);
-        m_robotAnalyser.TestRobot(robotCycle, wallCycle);
+        m_robotAnalyser.TestRobot(robotCycle, wallCycle, onFindRobotCycle);
     }
 
     public void ResetBlocksToUse(BlockCategory category)

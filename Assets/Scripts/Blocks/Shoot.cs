@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Shoot : AbstractBlock
 {
-    private Transform shotTransform;
+    private Transform m_shotTransform;
 
     private float m_cooldownTime;
     private float m_speed;
@@ -17,17 +17,17 @@ public class Shoot : AbstractBlock
     {
         m_speed = 30f;
         m_cooldownTime = 1.5f;
-        
+
         LoadShotPrefab();
 
-        shotTransform = transform.FindChild("posShot");
+        m_shotTransform = GetComponentInChildren<PosShot>().transform;
     }
 
     public override void Run(Action<bool> blockCallback)
     {
         m_callback = blockCallback;
 
-        ((GameObject)Instantiate(m_shotPrefab, shotTransform.position, Quaternion.identity)).GetComponent<ShotInfo>().SetInfo(m_speed);
+        ((GameObject)Instantiate(m_shotPrefab, m_shotTransform.position, Quaternion.identity)).GetComponent<ShotInfo>().SetInfo(m_speed, m_shotTransform);
 
         Invoke("finishCooldownTime", m_cooldownTime);
     }
@@ -46,7 +46,7 @@ public class Shoot : AbstractBlock
     public override void Stop()
     {
         if (!IsRunning) return;
-        
+
         m_callback.Invoke(true);
 
         base.Stop();

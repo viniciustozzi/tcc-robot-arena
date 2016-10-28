@@ -6,10 +6,10 @@ public class ShotInfo : MonoBehaviour
 {
     private Rigidbody m_rigidbody;
 
-    public void SetInfo(float speed)
+    public void SetInfo(float speed, Transform sourceShooter)
     {
         m_rigidbody = GetComponent<Rigidbody>();
 
-        m_rigidbody.velocity = transform.forward * speed;
+        m_rigidbody.velocity = sourceShooter.forward * speed;
     }
 }
