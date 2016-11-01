@@ -10,8 +10,8 @@ public class UI_IfBlock : UIBlock
     
     protected override AbstractBlock SetupBlockInfo()
     {
-        Controller.Instance.CURRENT_ROBOT.name = "If";
-        var ifComp = Controller.Instance.CURRENT_ROBOT.AddComponent<If>();
+        Controller.Instance.CURRENT_EDIT_ROBOT.name = "If";
+        var ifComp = Controller.Instance.CURRENT_EDIT_ROBOT.AddComponent<If>();
         ifComp.condition = booleanExpression.GetBoolOperation();
         return ifComp;
     }

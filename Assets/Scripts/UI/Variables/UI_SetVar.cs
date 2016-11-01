@@ -16,7 +16,7 @@ public class UI_SetVar : UIBlock
 
     protected override AbstractBlock SetupBlockInfo()
     {
-        var setVar = Controller.Instance.CURRENT_ROBOT.AddComponent<SetVariable>();
+        var setVar = Controller.Instance.CURRENT_EDIT_ROBOT.AddComponent<SetVariable>();
         setVar.VarName = drop_var.itemText.text;
         setVar.Value = input_value.text;
         return setVar;

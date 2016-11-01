@@ -5,17 +5,13 @@ using System.Linq;
 
 public class RobotAnalyser : MonoBehaviour
 {
-    private ExecuteCycle m_mainCycle;
-    private OnWallCollisionCycle m_wallCycle;
-    private OnFindRobotCycle m_onFindCycle;
+    private RobotMain m_robot;
 
-    public void TestRobot(ExecuteCycle mainCycle, OnWallCollisionCycle wallCycle, OnFindRobotCycle onFindCycle)
+    public void TestRobot(RobotMain robot)
     {
-        m_mainCycle = mainCycle;
-        m_wallCycle = wallCycle;
-        m_onFindCycle = onFindCycle;
+        m_robot = robot;
 
-        Controller.Instance.CURRENT_ROBOT.name = "ROBO";
+        Controller.Instance.CURRENT_EDIT_ROBOT.name = "ROBO";
 
         InitializeCycles();
 
@@ -25,19 +21,19 @@ public class RobotAnalyser : MonoBehaviour
 
     public void InitializeCycles()
     {
-        if (m_mainCycle != null)
-            m_mainCycle.Initialize();
+        if (m_robot.MainCycle != null)
+            m_robot.MainCycle.Initialize();
 
-        if (m_wallCycle != null)
-            m_wallCycle.Initialize();
+        if (m_robot.OnWallCycle != null)
+            m_robot.OnWallCycle.Initialize();
 
-        if (m_onFindCycle != null)
-            m_onFindCycle.Initialize();
+        if (m_robot.OnFindCycle != null)
+            m_robot.OnFindCycle.Initialize();
     }
 
     public void RunMainCycle()
     {
-        if (m_mainCycle != null)
-            m_mainCycle.Run(null);
+        if (m_robot.MainCycle != null)
+            m_robot.MainCycle.Run(null);
     }
 }

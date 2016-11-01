@@ -9,8 +9,8 @@ public class UI_RotateRobot : UIBlock
     protected override AbstractBlock SetupBlockInfo()
     {
         //GameObject go = new GameObject();
-        Controller.Instance.CURRENT_ROBOT.name = "RotateRobot";
-        var rotateRobot = Controller.Instance.CURRENT_ROBOT.AddComponent<RobotRotate>();
+        Controller.Instance.CURRENT_EDIT_ROBOT.name = "RotateRobot";
+        var rotateRobot = Controller.Instance.CURRENT_EDIT_ROBOT.AddComponent<RobotRotate>();
         rotateRobot.Degrees = Angle;
 
         return rotateRobot;

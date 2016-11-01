@@ -10,7 +10,7 @@ public class UI_MoveAhead : UIBlock
 
     protected override AbstractBlock SetupBlockInfo()
     {
-        var move = Controller.Instance.CURRENT_ROBOT.AddComponent<MoveAhead>();
+        var move = Controller.Instance.CURRENT_EDIT_ROBOT.AddComponent<MoveAhead>();
         move.Distance = Distance;
 
         return move;

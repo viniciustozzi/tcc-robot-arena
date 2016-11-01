@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
+using UnityEngine.UI;
+using System.Linq;
 
 public class EditModeController : MonoBehaviour
 {
@@ -9,12 +11,15 @@ public class EditModeController : MonoBehaviour
     public GameObject robotPrefab;
     public Transform initialTransform;
     public CreateVarModalBehaviour createVarModal;
+    public InputField inp_robotName;
 
     private RobotAnalyser m_robotAnalyser;
 
     private ToUseBlocks m_toUseBlocks;
     private UsedBlocks m_usedBlocks;
     private TabsController m_tabsController;
+
+    private RobotMain m_robot;
 
     public Transform ToUseTransform { get { return m_toUseBlocks.transform; } }
     public Transform UsedBlocksTransform { get { return m_usedBlocks.transform; } }
@@ -26,9 +31,6 @@ public class EditModeController : MonoBehaviour
         m_toUseBlocks = FindObjectOfType<ToUseBlocks>();
         m_usedBlocks = FindObjectOfType<UsedBlocks>();
         m_tabsController = FindObjectOfType<TabsController>();
-
-        VariableController.DeclareVariable("x", VariableType.Number, 1);
-        VariableController.DeclareVariable("y", VariableType.Number, 3);
     }
 
     private UI_OnBegin getOnBeginBlock()
@@ -64,31 +66,44 @@ public class EditModeController : MonoBehaviour
         return null;
     }
 
-    public void SaveRobot()
+    private void configureRobot()
     {
-        Controller.Instance.CURRENT_ROBOT = (GameObject)Instantiate(robotPrefab, initialTransform.position, Quaternion.identity);
+        Controller.Instance.CURRENT_EDIT_ROBOT = (GameObject)Instantiate(robotPrefab, initialTransform.position, Quaternion.identity);
 
         var root = getOnBeginBlock();
         var onWallRoot = getOnWallCollisionBlock();
         var onFindRobot = getOnFindRobotBlock();
 
-        ExecuteCycle robotCycle = null;
+        m_robot = new RobotMain();
 
         if (root != null)
-            robotCycle = (ExecuteCycle)root.GetLogicBlockStructure();
-
-        OnWallCollisionCycle wallCycle = null;
+            m_robot.MainCycle = (ExecuteCycle)root.GetLogicBlockStructure();
 
         if (onWallRoot != null)
-            wallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
-
-        OnFindRobotCycle onFindRobotCycle = null;
+            m_robot.OnWallCycle = (OnWallCollisionCycle)onWallRoot.GetLogicBlockStructure();
 
         if (onFindRobot != null)
-            onFindRobotCycle = (OnFindRobotCycle)onFindRobot.GetLogicBlockStructure();
+            m_robot.OnFindCycle = (OnFindRobotCycle)onFindRobot.GetLogicBlockStructure();
+    }
+
+    public void SaveRobot()
+    {
+        configureRobot();
+
+        string name = inp_robotName.text;
+
+        if (Controller.Instance.AllRobotsSaved.Any(x => x.Name == name))
+            Controller.Instance.EnableModal("Já existe um robô com esse nome!");
+        else
+            Controller.Instance.AllRobotsSaved.Add(m_robot);
+    }
+
+    public void TestRobot()
+    {
+        configureRobot();
 
         editCanvas.SetActive(false);
-        m_robotAnalyser.TestRobot(robotCycle, wallCycle, onFindRobotCycle);
+        m_robotAnalyser.TestRobot(m_robot);
     }
 
     public void ResetBlocksToUse(BlockCategory category)

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class Controller : MonoBehaviour
 {
@@ -29,5 +31,27 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public GameObject CURRENT_ROBOT;
+    public GameObject CURRENT_EDIT_ROBOT;
+
+    public List<RobotMain> AllRobotsSaved = new List<RobotMain>();
+
+    public void EnableModal(string message = "", Action onCloseCallback = null)
+    {
+        ModalBehaviour modal = FindObjectOfType<ModalBehaviour>();
+
+        //Se já existir uma modal na cena
+        if (modal != null)
+        {
+            //Mata a modal
+            Destroy(modal.gameObject);
+        }
+        else
+        {
+            //Carrega o prefab de modal do resources
+            var modalGO = Resources.Load<GameObject>("Prefabs/pnl_MessageModal");
+
+            //Instancia o modal e preenche a informação da mensagem
+            Instantiate(modalGO).GetComponent<ModalBehaviour>().SetInfo(message, onCloseCallback);
+        }
+    }
 }
