@@ -11,12 +11,14 @@ public class ModalBehaviour : MonoBehaviour
 
     private Action m_onCloseCallback;
 
-    public void SetInfo(string message, Action onCloseCallback = null, bool oneButton = true)
+    public void SetInfo(string message, Action onCloseCallback = null, Action onButtonOkCallback = null)
     {
         textMsg.text = message;
 
         m_onCloseCallback = onCloseCallback;
     }
+
+    public void SetInfo(string message, Action onClosecallback = null, )
 
     public void OnOkClick()
     {

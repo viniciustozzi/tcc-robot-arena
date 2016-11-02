@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ModalBuilder
 {
@@ -8,8 +9,7 @@ public class ModalBuilder
         get
         {
             var modalPrefab = Resources.Load<GameObject>("Prefabs/pnl_Modal");
-            //TODO: Terminar de configurar a modal antes de enviar
-            //modalPrefab.GetComponent<ModalBehaviour>().SetInfo(message, )
+            modalPrefab.GetComponent<ModalBehaviour>().SetInfo(message, )
             return modalPrefab;
         }
     }
@@ -21,8 +21,18 @@ public class ModalBuilder
         m_message = message;
     }
 
-    public void SetOkButton()
+    public void SetOneButton(Action onOkClick)
     {
         
+    }
+
+    public void SetTwoButtons()
+    {
+        
+    }
+
+    public void SetCloseCallback(Action onCloseCallback)
+    {
+
     }
 }
