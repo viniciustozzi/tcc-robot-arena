@@ -1,0 +1,40 @@
+Principais problemas da "Bibliografia Comentada"
+
+1. Livro
+a) SOBRENOME COMPLETO, I. (INICIAL dos nomes e ".") e separar autores com ";"
+Ex.: BERBEL, T. R. L.; CAMPOS, D.
+b) colocar ano e "." (ponto).
+c) Não esquecer o "local: editora".
+d) A paginação é opcional:
+500p.
+p. 12-30.
+e) Nome do livro é em negrito.
+
+2. Artigos
+a) Nome do veículo (Revista, Jornal, etc) em negrito.
+b) Se o artigo possuir mais de 3 autores usar expressão et al.
+c) Volume e número colocar o que realmente está na referência.
+v.1,n.1
+d) Pode inserir links.
+e) Caso você encontre uma dissertação, busque por artigos da mesma autoria
+
+3. Anais de Congresso
+a) Consultar página 49 do Padrão Monografia para saber como referenciar trabalhos publicados em Anais de Congresso. Abaixo o modelo de como deve ser feito:
+SOBRENOME, PRENOME abreviado. Título: subtítulo (se houver) In: NOME DO EVENTO, número., ano. Local de realização do evento. Anais... Local de publicação dos resumos: Editora, ano. paginação.
+b) É diferente referênciar EVENTO do TRABALHO apresentado no evento (ver exemplo no doc. em anexo).
+c) Sigla sempre após a descrição completa do seu significado.
+
+4. Teses
+a) Sempre inserir a escola, unidade ou instituto após determinação da tese ou dissertação.
+Ex.: Tese (Doutorado em Lingüística) – Instituto de Estudos da Linguagem
+b) Volume é opcional.
+c) Paginação é importante.
+d) Não escrever todo o título em maiúsculo.
+
+5. Links
+a) Se página tiver um título este deve estar em negrito na referência.
+b) Se não tem autor a primeira palavra é toda maiúscula e sem negrito.
+c) MES. - Corresponde ao mês com 3 letras tudo em minúsculo com um ponto final acompanhando.
+d) Acesso em: DIA MES. ANO
+Ex.: 19 abr. 2016.
+e) Ano na referência do link é importante.
