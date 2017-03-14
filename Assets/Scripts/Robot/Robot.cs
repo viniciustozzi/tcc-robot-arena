@@ -53,12 +53,12 @@ public class Robot : MonoBehaviour
 					m_components.Add(move);
 					break;
 				case ActionType.RotateRobot:
-					m_robotActions.Add(() => rotateRobot.TurnCommand(_onEndExecuteAction));
+					//m_robotActions.Add(() => rotateRobot.TurnCommand(_onEndExecuteAction));
 					m_storedParams.Add(item.Parameters);
 					m_components.Add(rotateRobot);
 					break;
 				case ActionType.RotateCannon:
-					m_robotActions.Add(() => rotateCannon.TurnCommand(_onEndExecuteAction));
+					//m_robotActions.Add(() => rotateCannon.TurnCommand(_onEndExecuteAction));
 					m_storedParams.Add(item.Parameters);
 					m_components.Add(rotateCannon);
                     break;
@@ -73,12 +73,12 @@ public class Robot : MonoBehaviour
 
 	private void executeAllActions()
 	{
-		if (m_components[m_currentAction] is RobotMove)
-			((RobotMove)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
-		else if (m_components[m_currentAction] is RobotRotate)
-			((RobotRotate)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
-		else if (m_components[m_currentAction] is RobotShot)
-			((RobotShot)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
+		//if (m_components[m_currentAction] is RobotMove)
+		//	((RobotMove)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
+		//else if (m_components[m_currentAction] is RobotRotate)
+		//	((RobotRotate)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
+		//else if (m_components[m_currentAction] is RobotShot)
+		//	((RobotShot)m_components[m_currentAction]).SetParameter(m_storedParams[m_currentAction]);
 		
 		m_robotActions[m_currentAction].Invoke();
 	}

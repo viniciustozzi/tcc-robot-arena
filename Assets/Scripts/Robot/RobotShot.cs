@@ -15,15 +15,15 @@ public class RobotShot : MonoBehaviour
     {
         m_callback = onFinish;
 
-        ((GameObject)Instantiate(shotPrefab, shotTransform.position, Quaternion.identity)).GetComponent<ShotInfo>().SetInfo(speed);
-            
+        ((GameObject)Instantiate(shotPrefab, shotTransform.position, Quaternion.identity)).GetComponent<ShotInfo>().SetInfo(speed, shotTransform);
+
         Invoke("finishCooldownTime", cooldownTime);
     }
 
-	public void SetParameter(object value)
-	{
+    public void SetParameter(object x)
+    {
 
-	}
+    }
 
     private void finishCooldownTime()
     {
